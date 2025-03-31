@@ -27,7 +27,7 @@
         </button>
 
         <!-- Enlaces de navegación (Desktop) -->
-        <div class="hidden md:flex gap-6 md:gap-24 items-center">
+        <div class="hidden md:flex gap-6 md:gap-12 items-center">
           <a href="#" class="text-[#104e75] hover:text-[#003157] transition-colors duration-300 font-medium text-base">
             Inicio
           </a>
@@ -40,57 +40,113 @@
           <a href="#contacto" class="text-[#104e75] hover:text-[#003157] transition-colors duration-300 font-medium text-base">
             Contacto
           </a>
+
+          <div class="flex gap-4 ml-8">
+            <a 
+              href="/login"
+              class="bg-[#104e75] text-white px-4 py-2 rounded-lg hover:bg-[#003157] transition-colors duration-300 font-medium text-base"
+            >
+              Iniciar Sesión
+            </a>
+            <router-link 
+               to="/registro"
+              class="bg-white text-[#104e75] border-2 border-[#104e75] px-4 py-2 rounded-lg hover:bg-[#104e75] hover:text-white transition-colors duration-300 font-medium text-base"
+            >
+              Crear cuenta
+            </router-link>
+          </div>
         </div>
-      </div>
+      </div> 
 
       <div 
-        v-show="isMenuOpen"
-        class="md:hidden fixed top-[60px] inset-x-0 w-full bg-white shadow-lg transform transition-all duration-300 ease-in-out overflow-y-auto"
+      v-show="isMenuOpen"
+      class="md:hidden fixed inset-0 z-[9999] bg-black/50 backdrop-blur-sm transition-all duration-300"
+      :class="isMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'"
+      @click="toggleMenu"
+    >
+      <div 
+        class="absolute top-0 right-0 w-80 h-full bg-gradient-to-b from-[#f0f8ff] to-white shadow-2xl transform transition-transform duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]"
         :class="isMenuOpen ? 'translate-x-0' : 'translate-x-full'"
       >
-        <div class="px-6 py-4 space-y-4 text-right h-full overflow-y-auto">
-          <a 
-            href="#" 
-            class="block text-[#104e75] hover:text-[#003157] transition-colors duration-300 font-medium text-base"
-            @click="isMenuOpen = false"
-          >
-            Inicio
-          </a>
-          <a 
-            href="#agendar-cita" 
-            class="block text-[#104e75] hover:text-[#003157] transition-colors duration-300 font-medium text-base"
-            @click="isMenuOpen = false"
-          >
-            Servicio
-          </a>
-          <a 
-            href="#video-section" 
-            class="block text-[#104e75] hover:text-[#003157] transition-colors duration-300 font-medium text-base"
-            @click="isMenuOpen = false"
-          >
-            Nosotros
-          </a>
-          <a 
-            href="#contacto" 
-            class="block text-[#104e75] hover:text-[#003157] transition-colors duration-300 font-medium text-base"
-            @click="isMenuOpen = false"
-          >
-            Contacto
-          </a>
+        <div class="h-full flex flex-col">
+          <!-- Encabezado -->
+          <div class="px-6 py-5 border-b border-[#104e75]/10 flex items-center justify-between">
+            <img 
+              src="@/assets/imagenes/logo.jpeg" 
+              alt="Logo"
+              class="h-10 w-auto"
+            >
+            <button 
+              @click="toggleMenu"
+              class="text-[#104e75] hover:text-[#003157] transition-colors"
+            >
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Contenido del Menú -->
+          <nav class="flex-1 overflow-y-auto px-6 py-8 space-y-6">
+            <!-- Items de Navegación -->
+            <div class="space-y-4">
+              <a 
+                v-for="(link, index) in mobileLinks"
+                :key="index"
+                :href="link.href"
+                class="group flex items-center gap-3 text-[#104e75] hover:text-[#003157] transition-all duration-300 p-3 rounded-xl hover:bg-[#104e75]/5"
+                @click="toggleMenu"
+              >
+                <div class="w-8 h-8 bg-[#104e75]/10 rounded-lg flex items-center justify-center transition-colors group-hover:bg-[#104e75]/20">
+                  <i :class="link.icon + ' text-[#104e75] text-lg'"></i>
+                </div>
+                <span class="font-medium text-[15px]">{{ link.text }}</span>
+              </a>
+            </div>
+
+            <!-- Separador Decorativo -->
+            <div class="relative my-8">
+              <div class="absolute inset-0 flex items-center">
+                <div class="w-full border-t border-dashed border-[#104e75]/20"></div>
+              </div>
+              <div class="relative flex justify-center">
+                <span class="px-2 bg-white text-sm text-[#104e75]/60">Acceso rápido</span>
+              </div>
+            </div>
+
+            <!-- Botones de Acción -->
+            <div class="space-y-4">
+              <a 
+                href="/login"
+                class="block w-full bg-gradient-to-r from-[#003157] to-[#104e75] text-white px-6 py-3.5 rounded-xl font-semibold text-sm text-center shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all active:scale-95"
+              >
+                Iniciar Sesión
+              </a>
+              <router-link 
+                to="/registro"
+                class="block w-full bg-white text-[#104e75] border-2 border-transparent px-6 py-3.5 rounded-xl font-semibold text-sm text-center shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all active:scale-95 relative overflow-hidden"
+                style="background: linear-gradient(white, white) padding-box,
+                      linear-gradient(to right, #003157, #104e75) border-box;"
+              >
+                <span class="relative z-10">Crear cuenta</span>
+                <div class="absolute inset-0 bg-gradient-to-r from-[#003157] to-[#104e75] opacity-0 transition-opacity hover:opacity-10"></div>
+              </router-link>
+            </div>
+          </nav>
         </div>
       </div>
-    </nav>
-  </header>
-
+    </div>
+  </nav>
+</header>
   <!-- Espacio para header -->
   <div class="h-[60px]"></div>
 
   <!-- Contenido principal -->
-  <div class="relative w-full h-[786px] overflow-hidden">
+  <div class="relative w-full h-screen overflow-hidden">
     <img 
       src="@/assets/imagenes/imagen-de-fondo.jpg" 
       alt="Imagen de Fondo"
-      class="w-full h-auto object-cover"
+      class="w-full h-full object-cover"
     >
 
     <!-- Sección de Marketing Izquierda -->
@@ -1460,11 +1516,17 @@ export default {
         celular: '',
         distrito: '',
         servicio: ''
-      }
+      },
+      // Nuevo dato agregado para el menú móvil
+      mobileLinks: [
+        { text: 'Inicio', href: '#', icon: 'fas fa-home' },
+        { text: 'Servicio', href: '#agendar-cita', icon: 'fas fa-calendar-check' },
+        { text: 'Nosotros', href: '#video-section', icon: 'fas fa-users' },
+        { text: 'Contacto', href: '#contacto', icon: 'fas fa-envelope' }
+      ]
     }
   },
   mounted() {
-    // Cargar script de Calendly dinámicamente
     const script = document.createElement('script')
     script.type = 'text/javascript'
     script.src = 'https://assets.calendly.com/assets/external/widget.js'
@@ -1472,7 +1534,6 @@ export default {
     document.head.appendChild(script)
   },
   methods: {
-    // Método para toggle del menú móvil
     toggleMenu() {
       this.isMenuOpen = !this.isMenuOpen
     },
@@ -1534,10 +1595,42 @@ export default {
   opacity: 0;
   transform: scaleY(0.9);
 }
-</style>
 
-<style>
 html {
   scroll-behavior: smooth;
+}
+
+/* Nuevos estilos para el menú móvil */
+@keyframes menuEntry {
+  0% { transform: translateX(100%); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+.border-gradient {
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  position: relative;
+}
+
+.border-gradient::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  margin: -2px;
+  border-radius: inherit;
+  background: linear-gradient(to right, #003157, #104e75);
+}
+
+/* Mejoras de transición para el menú */
+.backdrop-blur-sm {
+  backdrop-filter: blur(4px);
+}
+
+.ease-\[cubic-bezier\(0\.4\,0\,0\.2\,1\)\] {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 </style>
