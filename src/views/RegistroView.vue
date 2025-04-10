@@ -1,13 +1,36 @@
 <template>
-  <!-- Contenedor principal -->
-  <div class="h-screen bg-[#dee3e9] flex items-center justify-center p-4">
-    <div class="w-full max-w-6xl bg-white rounded-2xl shadow-xl flex min-h-[85vh]">
+  <!-- Header -->
+  <header class="fixed top-0 inset-x-0 bg-white shadow-md z-[1000] px-4 md:px-12 py-2 h-[70px] md:h-[60px]">
+    <nav class="w-full h-full flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <router-link 
+          to="/" 
+          class="flex items-center gap-2 text-[#104e75] hover:text-[#003157] transition-colors group"
+        >
+          <!-- Diseño mejorado del botón "Volver" -->
+          <div class="relative w-8 h-8 flex items-center justify-center rounded-full bg-gradient-to-r from-[#104e75] to-[#448ba9] group-hover:scale-105 transition-transform">
+            <i class="fas fa-chevron-left text-white text-sm"></i>
+          </div>
+          <span class="hidden md:inline text-sm font-medium">Volver</span>
+        </router-link>
+        <img 
+          src="@/assets/imagenes/logo.jpeg" 
+          alt="Fullness Logo"
+          class="h-10 md:h-12 object-contain"
+        >
+      </div>
+    </nav>
+  </header>
+
+  <!-- Contenido principal -->
+  <main class="pt-[60px] h-screen bg-[#dee3e9] flex items-center justify-center p-4">
+    <div class="w-full max-w-6xl bg-white rounded-2xl shadow-xl flex flex-col md:flex-row min-h-[calc(100vh-100px)] max-h-[800px]">
       <!-- Sección ilustrativa -->
-      <div class="hidden md:block w-2/5 bg-gradient-to-b from-[#104e75] to-[#003157] rounded-l-2xl p-6 relative overflow-hidden">
+      <div class="hidden md:flex md:w-2/5 bg-gradient-to-b from-[#104e75] to-[#003157] rounded-l-2xl p-6 relative overflow-hidden">
         <div class="absolute inset-0 opacity-10 bg-[url('@/assets/imagenes/texture.png')]"></div>
         <div class="h-full flex flex-col justify-center text-white relative">
           <div class="space-y-5">
-            <img src="@/assets/imagenes/logo(1).png" alt="logo" class="w-24 h-24 mx-auto animate-fade-in">
+            <img src="@/assets/imagenes/logo(1).png" alt="logo" class="w-50 h-20 mx-auto animate-fade-in">
             <h2 class="text-2xl font-bold text-center font-sans">Tu camino al bienestar comienza aquí</h2>
             <p class="text-sm text-center opacity-90 leading-relaxed px-2">
               En Fullness, no solo te registras, te unes a una comunidad comprometida con tu salud integral.
@@ -37,7 +60,7 @@
       </div>
 
       <!-- Formulario -->
-      <div class="w-full md:w-3/5 p-6 flex flex-col justify-center">
+      <div class="w-full md:w-3/5 p-6 flex flex-col justify-center overflow-y-auto">
         <div class="text-center mb-6">
           <h1 class="text-2xl font-bold text-[#104e75] mb-1 font-sans">Comienza tu experiencia Fullness</h1>
           <p class="text-[#003157] text-sm">Crea tu cuenta en simples pasos</p>
@@ -63,7 +86,6 @@
               </div>
             </div>
           </button>
-          
           <button 
             @click="isFisio = true"
             :class="[
@@ -97,7 +119,6 @@
                 <i class="fas fa-user-tag absolute right-2 top-2.5 text-gray-400 text-sm"></i>
               </div>
             </div>
-
             <div class="space-y-1">
               <label class="text-xs font-medium text-gray-700">DNI / Identificación</label>
               <div class="relative">
@@ -109,7 +130,6 @@
                 <i class="fas fa-id-card absolute right-2 top-2.5 text-gray-400 text-sm"></i>
               </div>
             </div>
-
             <div class="space-y-1">
               <label class="text-xs font-medium text-gray-700">Correo electrónico</label>
               <div class="relative">
@@ -121,7 +141,6 @@
                 <i class="fas fa-envelope absolute right-2 top-2.5 text-gray-400 text-sm"></i>
               </div>
             </div>
-
             <div class="space-y-1">
               <label class="text-xs font-medium text-gray-700">Teléfono</label>
               <div class="relative">
@@ -133,7 +152,6 @@
                 <i class="fas fa-mobile-alt absolute right-2 top-2.5 text-gray-400 text-sm"></i>
               </div>
             </div>
-
             <div class="col-span-2 space-y-1">
               <label class="text-xs font-medium text-gray-700">Contraseña segura</label>
               <div class="relative">
@@ -205,18 +223,22 @@
                 <span class="px-2 bg-white text-gray-500 text-xs">Continúa con</span>
               </div>
             </div>
-
             <div class="flex gap-2">
-              <button @click="socialLogin('google')" class="flex-1 flex items-center justify-center gap-1 px-3 py-2 border border-gray-300 rounded-lg hover:bg-[#dee3e9] transition-colors group">
-                <i class="fab fa-google text-[#104e75] group-hover:text-[#003157] text-base"></i>
-                <span class="text-xs hidden md:inline">Google</span>
+              <button 
+                id="googleSignInButton"
+                class="flex-1 flex items-center justify-center gap-2 px-3 py-2 border border-gray-300 rounded-lg hover:bg-[#f8f9fa] transition-colors bg-white text-gray-700"
+              >
+                <img 
+                  src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" 
+                  class="w-4 h-4"
+                  alt="Google"
+                >
+                <span class="text-xs font-medium">Continuar con Google</span>
               </button>
-              
               <button @click="socialLogin('facebook')" class="flex-1 flex items-center justify-center gap-1 px-3 py-2 border border-gray-300 rounded-lg hover:bg-[#dee3e9] transition-colors group">
                 <i class="fab fa-facebook-f text-[#104e75] group-hover:text-[#003157] text-base"></i>
                 <span class="text-xs hidden md:inline">Facebook</span>
               </button>
-              
               <button @click="socialLogin('linkedin')" class="flex-1 flex items-center justify-center gap-1 px-3 py-2 border border-gray-300 rounded-lg hover:bg-[#dee3e9] transition-colors group">
                 <i class="fab fa-linkedin-in text-[#104e75] group-hover:text-[#003157] text-base"></i>
                 <span class="text-xs hidden md:inline">LinkedIn</span>
@@ -233,7 +255,7 @@
         </form>
       </div>
     </div>
-  </div>
+  </main>
 </template>
 
 <script>
@@ -244,6 +266,7 @@ export default {
       showLoader: true,
       loading: false,
       isFisio: false,
+      googleClientId: '488360135215-3fbij1cj0rijjlhh4lbo9vt0kvoenh55.apps.googleusercontent.com',
       form: {
         nombre: '',
         dni: '',
@@ -260,51 +283,88 @@ export default {
   mounted() {
     setTimeout(() => {
       this.showLoader = false
-    }, 2200)
+    }, 2200);
+    // Inicializa Google Sign-In después de montar el componente
+    this.$nextTick(() => {
+      if (window.google) {
+        window.google.accounts.id.initialize({
+          client_id: this.googleClientId,
+          callback: this.handleGoogleCredentialResponse,
+          ux_mode: 'popup',
+          context: 'signup'
+        });
+        // Personaliza el botón
+        window.google.accounts.id.renderButton(
+          document.getElementById('googleSignInButton'),
+          { 
+            theme: 'outline',
+            size: 'medium',
+            text: 'signup_with',
+            shape: 'rectangular',
+            width: 300
+          }
+        );
+      }
+    });
   },
   methods: {
     async handleSubmit() {
-      this.loading = true
+      this.loading = true;
       try {
-        await new Promise(resolve => setTimeout(resolve, 1500))
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        // Lógica de registro normal aquí
       } finally {
-        this.loading = false
+        this.loading = false;
+      }
+    },
+    async handleGoogleCredentialResponse(response) {
+      try {
+        this.loading = true;
+        // 1. Enviar credencial al backend
+        const res = await fetch('http://localhost:5000/auth/google/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            credential: response.credential,
+            isFisio: this.isFisio
+          })
+        });
+        const data = await res.json();
+        if (data.success) {
+          // 2. Redirigir al dashboard después del registro
+          this.$router.push('/dashboard');
+        } else {
+          console.error('Error en registro Google:', data.error);
+        }
+      } catch (error) {
+        console.error('Error al procesar Google Sign-In:', error);
+      } finally {
+        this.loading = false;
       }
     },
     socialLogin(provider) {
-      console.log(`Iniciando sesión con ${provider}`)
+      if (provider === 'google') {
+        // Forzar el popup de Google si el botón no funciona
+        window.google.accounts.id.prompt();
+      } else {
+        console.log(`Iniciando sesión con ${provider}`);
+      }
     }
   }
 }
 </script>
 
 <style>
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+/* Estilos adicionales para el botón de Google */
+.g_id_signin iframe {
+  width: 100% !important;
+  height: 40px !important;
 }
-.animate-float {
-  animation: float 3s ease-in-out infinite;
-}
-
-@keyframes progress {
-  0% { width: 0; }
-  100% { width: 100%; }
-}
-.animate-progress {
-  animation: progress 2s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.animate-fade-in {
-  animation: fadeIn 1s ease-out;
-}
-
-input:focus, select:focus, button:focus {
-  outline: none;
-  ring-color: #448ba9;
+/* Asegura que el botón personalizado tenga el mismo estilo */
+#googleSignInButton {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>

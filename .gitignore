@@ -24,3 +24,5 @@ Thumbs.db
 # Archivos de Vue.js  y vite 
 
 .vite/
+
+.env
