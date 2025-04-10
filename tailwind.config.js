@@ -42,15 +42,15 @@ export default {
   plugins: [
     require('@tailwindcss/typography'),
     require('@tailwindcss/forms')({
-      strategy: 'class', // Usa clases en lugar de estilos base
+      strategy: 'class',
     })
   ],
   corePlugins: {
-    // Deshabilita plugins que no necesites
+
     float: false,
     clear: false
   },
-  // Configuración adicional para variantes
+
   variants: {
     extend: {
       opacity: ['disabled'],

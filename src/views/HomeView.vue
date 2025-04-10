@@ -1625,13 +1625,13 @@
          const ahora = new Date();
          const fechaHora = ahora.toISOString();
          
-         // Mapear servicio a ID (deberías obtener estos IDs de tu base de datos)
+        
          const servicioId = this.formData.servicio === 'Fisioterapia Domiciliaria' ? 1 : 2;
          
          // Datos para enviar al backend
          const citaData = {
-           id_paciente: 1, // Reemplaza con el ID del usuario logueado
-           id_especialista: 1, // Reemplaza con un selector de especialista
+           id_paciente: 1, 
+           id_especialista: 1,
            id_servicio: servicioId,
            fecha_hora: fechaHora,
            dolencia: "Consulta inicial - " + this.formData.distrito,
@@ -1735,7 +1735,7 @@
     background: linear-gradient(to right, #003157, #104e75);
   }
 
-  /* Mejoras de transición para el menú */
+  
   .backdrop-blur-sm {
     backdrop-filter: blur(4px);
   }

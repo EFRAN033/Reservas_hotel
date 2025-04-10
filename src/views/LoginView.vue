@@ -8,7 +8,7 @@
             to="/" 
             class="flex items-center gap-2 text-[#104e75] hover:text-[#003157] transition-colors group"
           >
-            <!-- Icono de flecha mejorado -->
+            <!-- Icono de flecha  -->
             <div class="relative w-8 h-8 flex items-center justify-center rounded-full bg-gradient-to-r from-[#104e75] to-[#448ba9] group-hover:scale-105 transition-transform">
               <i class="fas fa-chevron-left text-white text-sm"></i>
             </div>

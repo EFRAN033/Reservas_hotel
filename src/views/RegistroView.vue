@@ -360,7 +360,7 @@ export default {
   width: 100% !important;
   height: 40px !important;
 }
-/* Asegura que el botón personalizado tenga el mismo estilo */
+
 #googleSignInButton {
   height: 40px;
   display: flex;
