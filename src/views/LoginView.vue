@@ -2,30 +2,29 @@
   <div class="min-h-screen bg-[#f5f9fc] flex">
     <!-- Header -->
     <header class="fixed top-0 inset-x-0 bg-white shadow-md z-[1000] px-4 md:px-12 py-2 h-[70px] md:h-[60px]">
-      <nav class="w-full h-full flex items-center justify-between">
-        <div class="flex items-center gap-4">
-          <router-link 
-            to="/" 
-            class="flex items-center gap-2 text-[#104e75] hover:text-[#003157] transition-colors group"
-          >
-            <!-- Icono de flecha  -->
-            <div class="relative w-8 h-8 flex items-center justify-center rounded-full bg-gradient-to-r from-[#104e75] to-[#448ba9] group-hover:scale-105 transition-transform">
-              <i class="fas fa-chevron-left text-white text-sm"></i>
-            </div>
-            <span class="hidden md:inline text-sm font-medium">Volver</span>
-          </router-link>
-          <a href="#" class="flex items-center h-14 overflow-hidden">
-            <img 
-              src="@/assets/imagenes/LOGO.svg" 
-              alt="Fullness Logo"
-              class="h-12 translate-y-2 object-contain hover:scale-105 transition-transform duration-300"
+        <nav class="w-full h-full flex items-center justify-between">
+          <div class="flex items-center gap-4">
+            <router-link 
+              to="/" 
+              class="flex items-center gap-2 text-[#104e75] hover:text-[#003157] transition-colors group"
             >
-          </a>
+              <!-- Icono de flecha  -->
+              <div class="relative w-8 h-8 flex items-center justify-center rounded-full bg-gradient-to-r from-[#104e75] to-[#448ba9] group-hover:scale-105 transition-transform">
+                <i class="fas fa-chevron-left text-white text-sm"></i>
+              </div>
+              <span class="hidden md:inline text-sm font-medium">Volver</span>
+            </router-link>
+            <a href="#" class="flex items-center h-14 overflow-hidden">
+              <img 
+                src="@/assets/imagenes/LOGO.svg" 
+                alt="Fullness Logo"
+                class="h-12 translate-y-2 object-contain hover:scale-105 transition-transform duration-300"
+              >
+            </a>
 
-        </div>
-      </nav>
-    </header>
-
+          </div>
+        </nav>
+      </header>
     <!-- Espacio para el Header -->
     <div class="h-[70px] md:h-[60px]"></div>
 
@@ -160,14 +159,25 @@ export default {
       }
     }
   },
+  //Isaac
   methods: {
     handleLogin() {
-      // Lógica de inicio de sesión
+      // Validación de credenciales
+      if (this.form.email === 'abc@gmail.com' && this.form.password === '123456') {
+        // Guardar estado de autenticación en localStorage
+        localStorage.setItem('isAuthenticated', 'true');
+        // Redirigir al usuario a la página de inicio
+        this.$router.push('/');
+      } else {
+        // Mostrar mensaje de error
+        alert('Credenciales incorrectas. Por favor, intente nuevamente.');
+      }
     },
     socialLogin(provider) {
       // Lógica para login social
     }
   }
+  //Isaac Fin
 }
 </script>
 

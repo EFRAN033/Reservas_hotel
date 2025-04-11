@@ -1,134 +1,222 @@
-  <template>
-    <header class="fixed top-0 inset-x-0 bg-white shadow-md z-[1000] px-6 md:px-12 py-1 mx-auto max-w-[100vw] overflow-x-hidden">
-      <nav class="w-full">
-        <div class="flex justify-between items-center">
-          <!-- Logo -->
-          <a href="#" class="flex items-center h-14 overflow-hidden">
-            <img 
-              src="@/assets/imagenes/LOGO.svg" 
-              alt="Fullness Logo"
-              class="h-12 translate-y-2 object-contain hover:scale-105 transition-transform duration-300"
-            >
-          </a>
-          <!-- Menú Hamburguesa (Mobile) -->
-          <button 
-            @click="isMenuOpen = !isMenuOpen"
-            class="md:hidden p-2 text-[#104e75] focus:outline-none"
+<template>
+  <header
+    class="fixed top-0 inset-x-0 bg-white shadow-md z-[1000] px-6 md:px-12 py-1 mx-auto max-w-[100vw] overflow-x-hidden"
+  >
+    <nav class="w-full">
+      <div class="flex justify-between items-center">
+        <!-- Logo -->
+        <a href="#" class="flex items-center h-14 overflow-hidden">
+              <img 
+                src="@/assets/imagenes/LOGO.svg" 
+                alt="Fullness Logo"
+                class="h-12 translate-y-2 object-contain hover:scale-105 transition-transform duration-300"
+              >
+        </a>
+
+        <!-- Menú Hamburguesa (Mobile) -->
+        <button
+          @click="isMenuOpen = !isMenuOpen"
+          class="md:hidden p-2 text-[#104e75] focus:outline-none"
+        >
+          <svg
+            class="w-8 h-8"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
           >
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path 
-                stroke-linecap="round" 
-                stroke-linejoin="round" 
-                stroke-width="2" 
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
-          </button>
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+        </button>
 
-          <!-- Enlaces de navegación (Desktop) -->
-          <div class="hidden md:flex gap-6 md:gap-12 items-center">
-            <a href="#" class="text-[#104e75] hover:text-[#003157] transition-colors duration-300 font-medium text-base">
-              Inicio
-            </a>
-            <a href="#agendar-cita" class="text-[#104e75] hover:text-[#003157] transition-colors duration-300 font-medium text-base">
-              Servicio
-            </a>
-            <a href="#video-section" class="text-[#104e75] hover:text-[#003157] transition-colors duration-300 font-medium text-base">
-              Nosotros
-            </a>
-            <a href="#contacto" class="text-[#104e75] hover:text-[#003157] transition-colors duration-300 font-medium text-base">
-              Contacto
-            </a>
+        <!-- Enlaces de navegación (Desktop) -->
+        <div class="hidden md:flex gap-6 md:gap-12 items-center">
+          <a
+            href="#"
+            class="text-[#104e75] hover:text-[#003157] transition-colors duration-300 font-medium text-base"
+          >
+            Inicio
+          </a>
+          <a
+            href="#agendar-cita"
+            class="text-[#104e75] hover:text-[#003157] transition-colors duration-300 font-medium text-base"
+          >
+            Servicio
+          </a>
+          <a
+            href="#video-section"
+            class="text-[#104e75] hover:text-[#003157] transition-colors duration-300 font-medium text-base"
+          >
+            Nosotros
+          </a>
+          <a
+            href="#contacto"
+            class="text-[#104e75] hover:text-[#003157] transition-colors duration-300 font-medium text-base"
+          >
+            Contacto
+          </a>
 
-            <div class="flex gap-4 ml-8">
-              <a 
+          <!--ISAAC -->
+          <div class="flex gap-4 ml-8">
+            <!-- Mostrar botones de login/registro si no está autenticado -->
+            <template v-if="!isAuthenticated">
+              <a
                 href="/login"
                 class="bg-[#104e75] text-white px-4 py-2 rounded-lg hover:bg-[#003157] transition-colors duration-300 font-medium text-base"
               >
                 Iniciar Sesión
               </a>
-              <router-link 
+              <router-link
                 to="/registro"
                 class="bg-white text-[#104e75] border-2 border-[#104e75] px-4 py-2 rounded-lg hover:bg-[#104e75] hover:text-white transition-colors duration-300 font-medium text-base"
               >
                 Crear cuenta
               </router-link>
+            </template>
+
+            <!-- Mostrar icono de usuario si está autenticado -->
+            <div v-else class="flex items-center gap-4">
+              <div
+                @click="logout"
+                class="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity"
+              >
+                <div
+                  class="w-8 h-8 bg-[#104e75] rounded-full flex items-center justify-center text-white"
+                >
+                  <i class="fas fa-user"></i>
+                </div>
+                <span class="text-[#104e75] font-medium">Usuario</span>
+              </div>
             </div>
           </div>
-        </div> 
+          <!--ISAAC FIN -->
+        </div>
+      </div>
 
-        <div 
+      <div
         v-show="isMenuOpen"
         class="md:hidden fixed inset-0 z-[9999] bg-black/50 backdrop-blur-sm transition-all duration-300"
         :class="isMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'"
         @click="toggleMenu"
       >
-        <div 
+        <div
           class="absolute top-0 right-0 w-80 h-full bg-gradient-to-b from-[#f0f8ff] to-white shadow-2xl transform transition-transform duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]"
           :class="isMenuOpen ? 'translate-x-0' : 'translate-x-full'"
         >
           <div class="h-full flex flex-col">
             <!-- Encabezado -->
-            <div class="px-6 py-5 border-b border-[#104e75]/10 flex items-center justify-between">
-              <img 
-                src="@/assets/imagenes/LOGO.svg" 
+            <div
+              class="px-6 py-5 border-b border-[#104e75]/10 flex items-center justify-between"
+            >
+              <img
+                src="@/assets/imagenes/LOGO.svg"
                 alt="Logo"
                 class="h-10 w-auto"
+              />
+              <button
+                @click="closeMenu"
+                class="w-8 h-8 flex items-center justify-center rounded-full bg-[#104e75]/10 hover:bg-[#104e75]/20 transition-colors"
               >
-              <button 
-              @click="closeMenu"
-              class="w-8 h-8 flex items-center justify-center rounded-full bg-[#104e75]/10 hover:bg-[#104e75]/20 transition-colors"
-              >
-              <svg class="w-5 h-5 text-[#104e75]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-              </svg>
+                <svg
+                  class="w-5 h-5 text-[#104e75]"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
               </button>
             </div>
 
             <!-- Contenido del Menú -->
             <nav class="flex-1 overflow-y-auto px-6 py-8 space-y-6">
               <!-- Items de Navegación -->
+              <!-- Botones de Acción -->
               <div class="space-y-4">
-                <a 
-                  v-for="(link, index) in mobileLinks"
-                  :key="index"
-                  :href="link.href"
-                  class="group flex items-center gap-3 text-[#104e75] hover:text-[#003157] transition-all duration-300 p-3 rounded-xl hover:bg-[#104e75]/5"
-                  @click="toggleMenu"
-                >
-                  <div class="w-8 h-8 bg-[#104e75]/10 rounded-lg flex items-center justify-center transition-colors group-hover:bg-[#104e75]/20">
-                    <i :class="link.icon + ' text-[#104e75] text-lg'"></i>
+                <!-- Mostrar botones de login/registro si no está autenticado -->
+                <template v-if="!isAuthenticated">
+                  <a
+                    href="/login"
+                    class="block w-full bg-gradient-to-r from-[#003157] to-[#104e75] text-white px-6 py-3.5 rounded-xl font-semibold text-sm text-center shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all active:scale-95"
+                  >
+                    Iniciar Sesión
+                  </a>
+                  <router-link
+                    to="/registro"
+                    class="block w-full bg-white text-[#104e75] border-2 border-transparent px-6 py-3.5 rounded-xl font-semibold text-sm text-center shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all active:scale-95 relative overflow-hidden"
+                    style="
+                      background: linear-gradient(white, white) padding-box,
+                        linear-gradient(to right, #003157, #104e75) border-box;
+                    "
+                  >
+                    <span class="relative z-10">Crear cuenta</span>
+                    <div
+                      class="absolute inset-0 bg-gradient-to-r from-[#003157] to-[#104e75] opacity-0 transition-opacity hover:opacity-10"
+                    ></div>
+                  </router-link>
+                </template>
+
+                <!--ISAAC -->
+                <!-- Mostrar perfil de usuario y botón de cerrar sesión si está autenticado -->
+                <div v-else class="space-y-3">
+                  <div
+                    @click="logout"
+                    class="flex items-center gap-3 p-4 bg-[#f0f8ff] rounded-xl cursor-pointer hover:bg-[#e0f0ff] transition-colors"
+                  >
+                    <div
+                      class="w-10 h-10 bg-[#104e75] rounded-full flex items-center justify-center text-white"
+                    >
+                      <i class="fas fa-user"></i>
+                    </div>
+                    <span class="text-[#104e75] font-medium">Usuario</span>
                   </div>
-                  <span class="font-medium text-[15px]">{{ link.text }}</span>
-                </a>
+                </div>
+                <!--ISAAC FIN -->
               </div>
 
               <!-- Separador Decorativo -->
               <div class="relative my-8">
                 <div class="absolute inset-0 flex items-center">
-                  <div class="w-full border-t border-dashed border-[#104e75]/20"></div>
+                  <div
+                    class="w-full border-t border-dashed border-[#104e75]/20"
+                  ></div>
                 </div>
                 <div class="relative flex justify-center">
-                  <span class="px-2 bg-white text-sm text-[#104e75]/60">Acceso rápido</span>
+                  <span class="px-2 bg-white text-sm text-[#104e75]/60"
+                    >Acceso rápido</span
+                  >
                 </div>
               </div>
 
               <!-- Botones de Acción -->
               <div class="space-y-4">
-                <a 
+                <a
                   href="/login"
                   class="block w-full bg-gradient-to-r from-[#003157] to-[#104e75] text-white px-6 py-3.5 rounded-xl font-semibold text-sm text-center shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all active:scale-95"
                 >
                   Iniciar Sesión
                 </a>
-                <router-link 
+                <router-link
                   to="/registro"
                   class="block w-full bg-white text-[#104e75] border-2 border-transparent px-6 py-3.5 rounded-xl font-semibold text-sm text-center shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all active:scale-95 relative overflow-hidden"
-                  style="background: linear-gradient(white, white) padding-box,
-                        linear-gradient(to right, #003157, #104e75) border-box;"
+                  style="
+                    background: linear-gradient(white, white) padding-box,
+                      linear-gradient(to right, #003157, #104e75) border-box;
+                  "
                 >
                   <span class="relative z-10">Crear cuenta</span>
-                  <div class="absolute inset-0 bg-gradient-to-r from-[#003157] to-[#104e75] opacity-0 transition-opacity hover:opacity-10"></div>
+                  <div
+                    class="absolute inset-0 bg-gradient-to-r from-[#003157] to-[#104e75] opacity-0 transition-opacity hover:opacity-10"
+                  ></div>
                 </router-link>
               </div>
             </nav>
@@ -1526,7 +1614,7 @@
   </template>
  <script>
  export default {
-   name: 'HomeView',
+   name: "HomeView",
    data() {
      return {
        isMenuOpen: false,
@@ -1535,110 +1623,151 @@
        showModal: false,
        loading: false,
        formData: {
-         nombre: '',
-         apellido: '',
-         email: '',
-         celular: '',
-         distrito: '',
-         servicio: '',
-         tipo_paciente: ''
+         nombre: "",
+         apellido: "",
+         email: "",
+         celular: "",
+         distrito: "",
+         servicio: "",
+         tipo_paciente: "",
+         //Isaac
+         isAuthenticated: false,
+         //Isaac Fin
        },
        errors: {
-         email: '',
-         celular: ''
+         email: "",
+         celular: "",
        },
        mobileLinks: [
-         { text: 'Inicio', href: '#', icon: 'fas fa-home' },
-         { text: 'Servicio', href: '#agendar-cita', icon: 'fas fa-calendar-check' },
-         { text: 'Nosotros', href: '#video-section', icon: 'fas fa-users' },
-         { text: 'Contacto', href: '#contacto', icon: 'fas fa-envelope' }
-       ]
-     }
+         { text: "Inicio", href: "#", icon: "fas fa-home" },
+         {
+           text: "Servicio",
+           href: "#agendar-cita",
+           icon: "fas fa-calendar-check",
+         },
+         { text: "Nosotros", href: "#video-section", icon: "fas fa-users" },
+         { text: "Contacto", href: "#contacto", icon: "fas fa-envelope" },
+       ],
+     };
+   },
+   created() {
+     // Verificar si el usuario está autenticado al cargar la página
+     const isLoggedIn = localStorage.getItem("isAuthenticated") === "true";
+     this.isAuthenticated = isLoggedIn;
    },
    mounted() {
-     const script = document.createElement('script')
-     script.type = 'text/javascript'
-     script.src = 'https://assets.calendly.com/assets/external/widget.js'
-     script.async = true
-     document.head.appendChild(script)
+     const script = document.createElement("script");
+     script.type = "text/javascript";
+     script.src = "https://assets.calendly.com/assets/external/widget.js";
+     script.async = true;
+     document.head.appendChild(script);
    },
    methods: {
      toggleMenu() {
-       this.isMenuOpen = !this.isMenuOpen
-     },
-     
+        this.isMenuOpen = !this.isMenuOpen
+      },
+      
+      //Isaac
+      closeMenu() {
+        this.isMenuOpen = false
+      },
+ 
+      logout() {
+        // Eliminar el estado de autenticación del localStorage
+        localStorage.removeItem('isAuthenticated');
+        // Actualizar el estado local
+        this.isAuthenticated = false;
+        // Cerrar el menú móvil si está abierto
+        this.isMenuOpen = false;
+        // Recargar la página para asegurar que todos los componentes se actualicen
+        window.location.reload();
+      },
+      //Isaac Fin
+ 
      toggleFaq(num) {
-       this.activeFaq = this.activeFaq === num ? null : num
+       this.activeFaq = this.activeFaq === num ? null : num;
      },
  
      validateEmail() {
-       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
        if (!this.formData.email) {
-         this.errors.email = 'El email es requerido'
+         this.errors.email = "El email es requerido";
        } else if (!emailRegex.test(this.formData.email)) {
-         this.errors.email = 'Ingresa un email válido'
+         this.errors.email = "Ingresa un email válido";
        } else {
-         this.errors.email = ''
+         this.errors.email = "";
        }
      },
  
      validateCelular() {
        if (!this.formData.celular) {
-         this.errors.celular = 'El celular es requerido'
-       } else if (this.formData.celular.length !== 9 || !/^[0-9]+$/.test(this.formData.celular)) {
-         this.errors.celular = 'Ingresa un número válido (9 dígitos)'
+         this.errors.celular = "El celular es requerido";
+       } else if (
+         this.formData.celular.length !== 9 ||
+         !/^[0-9]+$/.test(this.formData.celular)
+       ) {
+         this.errors.celular = "Ingresa un número válido (9 dígitos)";
        } else {
-         this.errors.celular = ''
+         this.errors.celular = "";
        }
      },
  
      validateForm() {
-       this.validateEmail()
-       this.validateCelular()
-       
+       this.validateEmail();
+       this.validateCelular();
+ 
        // Validar tipo de paciente
        if (!this.formData.tipo_paciente) {
-         return false
+         return false;
        }
-       
+ 
        // Validar campos obligatorios
-       const requiredFields = ['nombre', 'apellido', 'email', 'celular', 'distrito', 'servicio']
-       const isValid = requiredFields.every(field => !!this.formData[field])
-       
+       const requiredFields = [
+         "nombre",
+         "apellido",
+         "email",
+         "celular",
+         "distrito",
+         "servicio",
+       ];
+       const isValid = requiredFields.every((field) => !!this.formData[field]);
+ 
        // Verificar si hay errores
-       const hasErrors = Object.values(this.errors).some(error => error !== '')
-       
-       return isValid && !hasErrors
+       const hasErrors = Object.values(this.errors).some(
+         (error) => error !== ""
+       );
+ 
+       return isValid && !hasErrors;
      },
  
      async guardarCita() {
        try {
          if (!this.validateForm()) {
-          console.log("Validación de formulario fallida"); // 1. Validación
+           console.log("Validación de formulario fallida"); // 1. Validación
            return;
          }
  
          this.loading = true;
-         
+ 
          // Obtener fecha y hora actual
          const ahora = new Date();
          const fechaHora = ahora.toISOString();
-         
-        
-         const servicioId = this.formData.servicio === 'Fisioterapia Domiciliaria' ? 1 : 2;
-         
+ 
+         const servicioId =
+           this.formData.servicio === "Fisioterapia Domiciliaria" ? 1 : 2;
+ 
          // Datos para enviar al backend
          const citaData = {
-           id_paciente: 1, 
+           id_paciente: 1,
            id_especialista: 1,
            id_servicio: servicioId,
            fecha_hora: fechaHora,
            dolencia: "Consulta inicial - " + this.formData.distrito,
          };
  
-         const response = await fetch("http://localhost:5000/api/citas/", {                 
+         const response = await fetch("http://localhost:5000/api/citas/", {
            method: "POST",
-           headers: { 
+           headers: {
              "Content-Type": "application/json",
            },
            body: JSON.stringify(citaData),
@@ -1653,7 +1782,6 @@
          alert("¡Cita reservada con éxito!");
          console.log("Cita creada:", result);
          this.resetForm();
-         
        } catch (error) {
          console.error("Error al guardar cita:", error);
          alert(`Error: ${error.message}`);
@@ -1682,64 +1810,71 @@
        el.style.opacity = 0;
        el.style.transform = "scaleY(0.9)";
      },
-     
+ 
      afterEnter(el) {
        el.style.opacity = 1;
        el.style.transform = "scaleY(1)";
      },
-     
+ 
      leave(el) {
        el.style.opacity = 0;
        el.style.transform = "scaleY(0.9)";
      },
+   },
+ };
+ </script>
+ <style>
+ .faq-enter-active,
+ .faq-leave-active {
+   transition: all 0.3s ease;
+   transform-origin: top;
+ }
+ .faq-enter,
+ .faq-leave-to {
+   opacity: 0;
+   transform: scaleY(0.9);
+ }
+ 
+ html {
+   scroll-behavior: smooth;
+ }
+ 
+ /* Nuevos estilos para el menú móvil */
+ @keyframes menuEntry {
+   0% {
+     transform: translateX(100%);
+     opacity: 0;
+   }
+   100% {
+     transform: translateX(0);
+     opacity: 1;
    }
  }
- </script>
-  <style>
-  .faq-enter-active, .faq-leave-active {
-    transition: all 0.3s ease;
-    transform-origin: top;
-  }
-  .faq-enter, .faq-leave-to {
-    opacity: 0;
-    transform: scaleY(0.9);
-  }
-
-  html {
-    scroll-behavior: smooth;
-  }
-
-  /* Nuevos estilos para el menú móvil */
-  @keyframes menuEntry {
-    0% { transform: translateX(100%); opacity: 0; }
-    100% { transform: translateX(0); opacity: 1; }
-  }
-
-  .border-gradient {
-    border: 2px solid transparent;
-    background-clip: padding-box;
-    position: relative;
-  }
-
-  .border-gradient::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: -1;
-    margin: -2px;
-    border-radius: inherit;
-    background: linear-gradient(to right, #003157, #104e75);
-  }
-
-  
-  .backdrop-blur-sm {
-    backdrop-filter: blur(4px);
-  }
-
-  .ease-\[cubic-bezier\(0\.4\,0\,0\.2\,1\)\] {
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  </style>
+ 
+ .border-gradient {
+   border: 2px solid transparent;
+   background-clip: padding-box;
+   position: relative;
+ }
+ 
+ .border-gradient::before {
+   content: "";
+   position: absolute;
+   top: 0;
+   right: 0;
+   bottom: 0;
+   left: 0;
+   z-index: -1;
+   margin: -2px;
+   border-radius: inherit;
+   background: linear-gradient(to right, #003157, #104e75);
+ }
+ 
+ .backdrop-blur-sm {
+   backdrop-filter: blur(4px);
+ }
+ 
+ .ease-\[cubic-bezier\(0\.4\,0\,0\.2\,1\)\] {
+   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+ }
+ </style>
