@@ -10,10 +10,6 @@
               class="h-12 translate-y-2 object-contain hover:scale-105 transition-transform duration-300"
             >
           </a>
-
-
-
-
           <!-- Menú Hamburguesa (Mobile) -->
           <button 
             @click="isMenuOpen = !isMenuOpen"
