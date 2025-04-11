@@ -1462,7 +1462,7 @@
                 </svg>
               </div>
               <div>
-                <p class="text-[#dee3e9] text-sm md:text-base">+51 987 654 321</p>
+                <p class="text-[#dee3e9] text-sm md:text-base">+51 941 609 887</p>
                 <p class="text-[0.6rem] md:text-[0.65rem] text-[#448ba9]/90">Llamada/WhatsApp</p>
               </div>
             </a>
