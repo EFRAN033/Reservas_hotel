@@ -15,7 +15,7 @@
             <span class="hidden md:inline text-sm font-medium">Volver</span>
           </router-link>
           <img 
-            src="@/assets/imagenes/logo.jpeg" 
+            src="@/assets/imagenes/LOGO.SVG" 
             alt="Fullness Logo"
             class="h-10 md:h-12 object-contain"
           >

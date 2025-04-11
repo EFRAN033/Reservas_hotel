@@ -72,7 +72,7 @@
             <!-- Encabezado -->
             <div class="px-6 py-5 border-b border-[#104e75]/10 flex items-center justify-between">
               <img 
-                src="@/assets/imagenes/logo.jpeg" 
+                src="@/assets/imagenes/LOGO.SVG" 
                 alt="Logo"
                 class="h-10 w-auto"
               >
@@ -1384,7 +1384,7 @@
         <div class="space-y-2 md:space-y-3">
           <div class="flex items-center gap-2">
             <img 
-              src="@/assets/imagenes/logo.jpeg" 
+              src="@/assets/imagenes/LOGO.SVG" 
               alt="Fiofulnes"
               class="h-10 w-10 md:h-12 md:w-12 object-cover rounded-lg border border-[#dee3e9]/20"
             >
