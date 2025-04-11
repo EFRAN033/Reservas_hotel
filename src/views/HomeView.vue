@@ -3,13 +3,15 @@
       <nav class="w-full">
         <div class="flex justify-between items-center">
           <!-- Logo -->
-          <a href="#" class="flex items-center">
-          <img 
-            src="@/assets/imagenes/LOGO.svg" 
-            alt="Fullness Logo"
-            class="h-12 relative top-2 object-contain hover:scale-105 transition-transform duration-300"
+          <a href="#" class="flex items-center h-14 overflow-hidden">
+            <img 
+              src="@/assets/imagenes/LOGO.svg" 
+              alt="Fullness Logo"
+              class="h-12 translate-y-2 object-contain hover:scale-105 transition-transform duration-300"
             >
-           </a>  
+          </a>
+
+
 
 
           <!-- Menú Hamburguesa (Mobile) -->
