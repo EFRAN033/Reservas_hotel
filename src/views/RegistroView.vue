@@ -13,11 +13,13 @@
           </div>
           <span class="hidden md:inline text-sm font-medium">Volver</span>
         </router-link>
-        <img 
-          src="@/assets/imagenes/LOGO.SVG"
-          alt="Fullness Logo"
-          class="h-10 md:h-12 object-contain"
-        >
+        <a href="#" class="flex items-center h-14 overflow-hidden">
+            <img 
+              src="@/assets/imagenes/LOGO.svg" 
+              alt="Fullness Logo"
+              class="h-12 translate-y-2 object-contain hover:scale-105 transition-transform duration-300"
+            >
+          </a>
       </div>
     </nav>
   </header>

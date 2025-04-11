@@ -7,9 +7,10 @@
           <img 
             src="@/assets/imagenes/LOGO.svg" 
             alt="Fullness Logo"
-            class="h-12 object-contain hover:scale-105 transition-transform duration-300"
-          >
-          </a>
+            class="h-12 relative top-2 object-contain hover:scale-105 transition-transform duration-300"
+            >
+           </a>  
+
 
           <!-- Menú Hamburguesa (Mobile) -->
           <button 
@@ -72,7 +73,7 @@
             <!-- Encabezado -->
             <div class="px-6 py-5 border-b border-[#104e75]/10 flex items-center justify-between">
               <img 
-                src="@/assets/imagenes/LOGO.SVG" 
+                src="@/assets/imagenes/LOGO.svg" 
                 alt="Logo"
                 class="h-10 w-auto"
               >
@@ -1384,12 +1385,12 @@
         <div class="space-y-2 md:space-y-3">
           <div class="flex items-center gap-2">
             <img 
-              src="@/assets/imagenes/LOGO.SVG" 
-              alt="Fiofulnes"
-              class="h-10 w-10 md:h-12 md:w-12 object-cover rounded-lg border border-[#dee3e9]/20"
+              src="@/assets/imagenes/LOGO.svg" 
+              alt="Fullness"
+              class="h-14 w-14 md:h-16 md:w-16 object-contain rounded-none fill-current text-[#dee3e9]"
             >
             <div>
-              <span class="text-base md:text-lg font-bold text-[#dee3e9]">Fiofulnes</span>
+              <span class="text-base md:text-lg font-bold text-[#dee3e9]">Fullness</span>
               <p class="text-[0.6rem] md:text-[0.7rem] text-[#448ba9]/90 mt-0.5">Colegiados CIP N° 28456</p>
             </div>
           </div>
