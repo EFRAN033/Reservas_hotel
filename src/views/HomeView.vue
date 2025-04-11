@@ -5,7 +5,7 @@
           <!-- Logo -->
           <a href="#" class="flex items-center">
           <img 
-            src="@/assets/imagenes/logo.jpeg" 
+            src="@/assets/imagenes/LOGO.svg" 
             alt="Fullness Logo"
             class="h-12 object-contain hover:scale-105 transition-transform duration-300"
           >
