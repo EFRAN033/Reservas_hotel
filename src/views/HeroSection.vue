@@ -34,13 +34,14 @@
             con tecnología de vanguardia.
           </p>
 
-          <!-- CTA Principal y secundario -->
+                    <!-- CTA Principal y secundario -->
           <div class="mb-10 flex flex-col space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
-            <a
-              href="#demo"
-              class="flex items-center justify-center rounded-xl bg-gradient-to-r from-blue-600 to-teal-500 px-8 py-4 text-lg font-bold text-white shadow-lg transition-all duration-300 hover:from-blue-700 hover:to-teal-600 hover:shadow-xl hover:shadow-blue-400/30"
+            <!-- Botón "Ver categorías" (ahora con router-link) -->
+            <router-link
+              to="/afiliados"
+              class="flex items-center justify-center rounded-xl bg-gradient-to-r from-blue-600 to-teal-500 px-8 py-4 text-lg font-bold text-white shadow-lg transition-all duration-300 hover:from-blue-700 hover:to-teal-600 hover:shadow-xl hover:shadow-blue-400/30 group"
             >
-              Ver categorias   
+              Ver categorías
               <svg
                 class="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1"
                 fill="none"
@@ -55,7 +56,9 @@
                   d="M14 5l7 7m0 0l-7 7m7-7H3"
                 ></path>
               </svg>
-            </a>
+            </router-link>
+
+            <!-- Botón secundario (se mantiene igual) -->
             <a
               href="#features"
               class="flex items-center justify-center rounded-xl border-2 border-gray-300 px-8 py-4 text-lg font-semibold text-gray-700 transition-all duration-300 hover:border-blue-500 hover:text-blue-600"

@@ -15,6 +15,7 @@ import HeroSection from '../views/HeroSection.vue';
 import PricingSection from '../views/PricingSection.vue';
 import StatsSection from '../views/StatsSection.vue';
 import TestimonialSection from '../views/TestimonialSection.vue';
+import Afileados from '../views/Afiliados.vue'; // Asegúrate de que la ruta sea correcta
 
 // Definición de rutas
 const routes = [
@@ -35,6 +36,11 @@ const routes = [
       { path: '', component: ClientsSection },
       { path: '', component: Footer }
     ]
+  },
+  {
+    path: '/afiliados',
+    name: 'Afileados',
+    component: Afileados
   }
 ];
 
