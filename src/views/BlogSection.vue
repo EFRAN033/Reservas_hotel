@@ -8,42 +8,89 @@
         <p class="text-gray-600">Conoce las últimas tendencias en gestión logística</p>
       </div>
 
-      <!-- Tarjetas compactas -->
-      <div class="grid md:grid-cols-3 gap-6">
-        <div
-          v-for="(post, index) in posts"
-          :key="index"
-          class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow border border-gray-100"
-        >
-          <!-- Imagen -->
-          <div class="relative h-48">
-            <img
-              :src="post.image"
-              :alt="post.title"
-              class="w-full h-full object-cover"
-            />
-            <div v-if="post.popular" class="absolute top-3 right-3 bg-yellow-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-              Destacado
+      <!-- Contenedor del carrusel (mobile) y grid (desktop) -->
+      <div class="relative">
+        <!-- Carrusel solo en mobile -->
+        <div class="md:hidden overflow-hidden">
+          <div class="flex space-x-6 pb-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide">
+            <div 
+              v-for="(post, index) in posts"
+              :key="index"
+              class="flex-shrink-0 w-72 snap-center"
+            >
+              <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow border border-gray-100">
+                <!-- Imagen -->
+                <div class="relative h-48">
+                  <img
+                    :src="post.image"
+                    :alt="post.title"
+                    class="w-full h-full object-cover"
+                  />
+                  <div v-if="post.popular" class="absolute top-3 right-3 bg-yellow-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                    Destacado
+                  </div>
+                </div>
+                
+                <!-- Contenido -->
+                <div class="p-5">
+                  <div class="flex items-center text-gray-500 text-xs mb-3">
+                    <span>{{ post.date }}</span>
+                    <span class="mx-1">•</span>
+                    <span>{{ post.readTime }}</span>
+                  </div>
+                  
+                  <h3 class="text-lg font-bold mb-3 text-gray-900">{{ post.title }}</h3>
+                  <p class="text-gray-600 text-sm mb-4">{{ post.excerpt }}</p>
+                  
+                  <a href="#" class="text-blue-600 text-sm font-medium hover:underline flex items-center">
+                    Leer más
+                    <svg class="ml-1 h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
-          
-          <!-- Contenido -->
-          <div class="p-5">
-            <div class="flex items-center text-gray-500 text-xs mb-3">
-              <span>{{ post.date }}</span>
-              <span class="mx-1">•</span>
-              <span>{{ post.readTime }}</span>
+        </div>
+
+        <!-- Grid solo en desktop -->
+        <div class="hidden md:grid md:grid-cols-3 gap-6">
+          <div
+            v-for="(post, index) in posts"
+            :key="index"
+            class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow border border-gray-100"
+          >
+            <!-- Imagen -->
+            <div class="relative h-48">
+              <img
+                :src="post.image"
+                :alt="post.title"
+                class="w-full h-full object-cover"
+              />
+              <div v-if="post.popular" class="absolute top-3 right-3 bg-yellow-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                Destacado
+              </div>
             </div>
             
-            <h3 class="text-lg font-bold mb-3 text-gray-900">{{ post.title }}</h3>
-            <p class="text-gray-600 text-sm mb-4">{{ post.excerpt }}</p>
-            
-            <a href="#" class="text-blue-600 text-sm font-medium hover:underline flex items-center">
-              Leer más
-              <svg class="ml-1 h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-              </svg>
-            </a>
+            <!-- Contenido -->
+            <div class="p-5">
+              <div class="flex items-center text-gray-500 text-xs mb-3">
+                <span>{{ post.date }}</span>
+                <span class="mx-1">•</span>
+                <span>{{ post.readTime }}</span>
+              </div>
+              
+              <h3 class="text-lg font-bold mb-3 text-gray-900">{{ post.title }}</h3>
+              <p class="text-gray-600 text-sm mb-4">{{ post.excerpt }}</p>
+              
+              <a href="#" class="text-blue-600 text-sm font-medium hover:underline flex items-center">
+                Leer más
+                <svg class="ml-1 h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -104,5 +151,20 @@ export default {
 }
 .transition-colors {
   transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Estilos para el carrusel */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.snap-x {
+  scroll-snap-type: x mandatory;
+}
+.snap-center {
+  scroll-snap-align: center;
 }
 </style>

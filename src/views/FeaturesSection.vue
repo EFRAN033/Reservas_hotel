@@ -1,7 +1,6 @@
 <template>
   <section id="soluciones" class="relative py-20 bg-gradient-to-br from-gray-50 to-white">
-    <!-- Elemento decorativo sutil -->
-    <div class="absolute top-0 right-0 h-64 w-64 -mr-32 -mt-32 rounded-full bg-blue-500 opacity-5"></div>
+    
     
     <div class="container mx-auto px-6">
       <!-- Encabezado con buen balance -->
