@@ -26,3 +26,5 @@ Thumbs.db
 .vite/
 
 .env
+
+Makefile
