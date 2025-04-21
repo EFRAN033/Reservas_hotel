@@ -1,5 +1,16 @@
-# Vue 3 + Vite
+🌐 Visión General
+roVeo+ es una plataforma B2B Enterprise que combina:
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+    Machine Learning para previsión de demanda
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+    Blockchain para trazabilidad de proveedores Hyperledger Fabric
+
+    Procesamiento de Lenguaje Natural (NLP) en contratos
+
+    Análisis de riesgos geo-políticos en tiempo real
+
+Diferencial competitivo:
+✔ Motor de "Smart Contracting" con IA que analiza 150+ cláusulas contractuales
+✔ Sistema anti-fraude con Redes Neuronales Graph Convolutional
+✔ Digital Twin para simulación de escenarios de disrupción
+    
