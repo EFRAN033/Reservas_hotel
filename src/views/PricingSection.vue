@@ -195,7 +195,7 @@ export default {
           features: [
             { text: "Gestión de hasta 20 proveedores", included: true },
             { text: "5,000 pedidos mensuales", included: true },
-            { text: "Soporte prioritario 24/5", included: true },
+            { text: "Soporte prioritario 24/7", included: true },
             { text: "Reportes avanzados", included: true },
           ],
         },

@@ -13,10 +13,11 @@
         </p>
       </div>
 
-      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-8">
+      <!-- Versión Desktop: Grid estático -->
+      <div class="hidden md:grid grid-cols-4 lg:grid-cols-7 gap-8">
         <div
           v-for="(client, index) in clients"
-          :key="index"
+          :key="'desktop-' + index"
           class="flex justify-center items-center h-20"
         >
           <img
@@ -25,6 +26,27 @@
             class="h-12 opacity-80 hover:opacity-100 transition-opacity"
             loading="lazy"
           />
+        </div>
+      </div>
+
+      <!-- Versión Mobile: Carrusel automático -->
+      <div class="md:hidden relative overflow-hidden h-24 w-full">
+        <div 
+          class="absolute top-0 left-0 flex items-center h-full carrusel-track"
+          :style="{ width: carruselWidth }"
+        >
+          <div 
+            v-for="(client, index) in duplicatedClients" 
+            :key="'mobile-' + index"
+            class="flex-shrink-0 flex justify-center items-center w-32 px-4"
+          >
+            <img
+              :src="client.logo"
+              :alt="`Logo ${client.name}`"
+              class="max-h-12 max-w-[100px] opacity-80 hover:opacity-100 transition-opacity"
+              loading="lazy"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -52,8 +74,54 @@ export default {
         { name: "DHL", logo: cliente5 },
         { name: "Maersk", logo: cliente6 },
         { name: "Coca Cola", logo: cliente7 }
-      ]
+      ],
+      carruselSpeed: 30 // Segundos para completar una vuelta
     };
+  },
+  computed: {
+    duplicatedClients() {
+      return [...this.clients, ...this.clients]; // Duplicamos para efecto infinito
+    },
+    carruselWidth() {
+      return `${this.clients.length * 160}px`; // Ancho total del carrusel
+    }
+  },
+  mounted() {
+    this.startCarrusel();
+  },
+  methods: {
+    startCarrusel() {
+      const carruselTrack = document.querySelector('.carrusel-track');
+      if (carruselTrack) {
+        const animation = carruselTrack.animate(
+          [
+            { transform: 'translateX(0)' },
+            { transform: `translateX(-${this.carruselWidth})` }
+          ],
+          {
+            duration: this.carruselSpeed * 1000,
+            iterations: Infinity
+          }
+        );
+        
+        // Pausar al hacer hover (opcional)
+        carruselTrack.addEventListener('mouseenter', () => animation.pause());
+        carruselTrack.addEventListener('mouseleave', () => animation.play());
+      }
+    }
   }
 };
 </script>
+
+<style scoped>
+/* Estilos específicos para el carrusel */
+.carrusel-track {
+  will-change: transform; /* Optimización para animaciones */
+}
+
+/* Asegurar que las imágenes no se deformen */
+img {
+  object-fit: contain;
+  height: auto;
+}
+</style>

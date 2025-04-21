@@ -16,6 +16,7 @@ import PricingSection from '../views/PricingSection.vue';
 import StatsSection from '../views/StatsSection.vue';
 import TestimonialSection from '../views/TestimonialSection.vue';
 import Afileados from '../views/Afiliados.vue'; // Asegúrate de que la ruta sea correcta
+import chatbot from '../views/chatbot.vue';
 
 // Definición de rutas
 const routes = [
@@ -34,7 +35,8 @@ const routes = [
       { path: '', component: TestimonialSection },
       { path: '', component: CtaSection },
       { path: '', component: ClientsSection },
-      { path: '', component: Footer }
+      { path: '', component: Footer },
+      { path: '', component: chatbot }
     ]
   },
   {

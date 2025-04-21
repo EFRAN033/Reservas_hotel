@@ -11,14 +11,26 @@
       <!-- Contenedor del carrusel (mobile) y grid (desktop) -->
       <div class="relative">
         <!-- Carrusel solo en mobile -->
-        <div class="md:hidden overflow-hidden">
-          <div class="flex space-x-6 pb-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide">
+        <div class="md:hidden overflow-hidden py-4">
+          <div 
+            class="flex space-x-4 pb-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide"
+            ref="carousel"
+            @scroll="handleScroll"
+          >
             <div 
               v-for="(post, index) in posts"
               :key="index"
-              class="flex-shrink-0 w-72 snap-center"
+              class="flex-shrink-0 w-[calc(100%-100px)] sm:w-80 transition-all duration-300"
+              :class="{
+                'scale-90 opacity-80': !isCenter(index),
+                'scale-100 shadow-lg': isCenter(index)
+              }"
+              :style="{
+                transform: isCenter(index) ? 'scale(1)' : 'scale(0.9)',
+                opacity: isCenter(index) ? '1' : '0.8'
+              }"
             >
-              <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow border border-gray-100">
+              <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 h-full">
                 <!-- Imagen -->
                 <div class="relative h-48">
                   <img
@@ -140,12 +152,54 @@ export default {
           readTime: "10 min",
         },
       ],
+      centerIndex: 0,
+      carouselWidth: 0,
+      itemWidth: 0
     };
   },
+  mounted() {
+    this.calculateDimensions();
+    window.addEventListener('resize', this.calculateDimensions);
+    
+    // Auto-scroll para demostración (opcional)
+    setInterval(() => {
+      this.centerIndex = (this.centerIndex + 1) % this.posts.length;
+      this.scrollToCenter();
+    }, 3000);
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.calculateDimensions);
+  },
+  methods: {
+    calculateDimensions() {
+      if (this.$refs.carousel) {
+        this.carouselWidth = this.$refs.carousel.offsetWidth;
+        this.itemWidth = this.carouselWidth * 0.8; // 80% del ancho del carrusel
+      }
+    },
+    handleScroll() {
+      const scrollLeft = this.$refs.carousel.scrollLeft;
+      this.centerIndex = Math.round(scrollLeft / this.itemWidth);
+    },
+    isCenter(index) {
+      return index === this.centerIndex;
+    },
+    scrollToCenter() {
+      if (this.$refs.carousel) {
+        this.$refs.carousel.scrollTo({
+          left: this.centerIndex * this.itemWidth,
+          behavior: 'smooth'
+        });
+      }
+    }
+  }
 };
 </script>
 
 <style scoped>
+.transition-all {
+  transition: all 0.3s ease;
+}
 .transition-shadow {
   transition: box-shadow 0.2s ease;
 }
@@ -166,5 +220,15 @@ export default {
 }
 .snap-center {
   scroll-snap-align: center;
+}
+
+/* Efecto de zoom para la tarjeta central */
+.scale-100 {
+  transform: scale(1);
+  z-index: 10;
+}
+.scale-90 {
+  transform: scale(0.9);
+  z-index: 1;
 }
 </style>

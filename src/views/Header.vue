@@ -1,9 +1,9 @@
 <template>
   <header class="fixed w-full bg-white shadow-md z-50">
-    <!-- Cambié container por w-full y añadí px-4 para mejor espaciado en móvil -->
     <div class="w-full px-4 py-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
       <div class="flex items-center justify-between">
-        <div class="text-2xl font-bold">
+        <!-- Logo completamente pegado a la izquierda -->
+        <div class="text-2xl font-bold -ml-3 transform translate-x-1">
           <span class="text-blue-600">Pro</span>
           <span class="text-blue-800">Veo</span>
         </div>
@@ -17,11 +17,13 @@
         </nav>
 
         <button class="md:hidden focus:outline-none" @click="toggleMenu">
-          <i class="fas fa-bars text-xl"></i>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
         </button>
       </div>
 
-      <!-- Menú móvil - Añadí w-full para asegurar que ocupe todo el ancho -->
+      <!-- Menú móvil -->
       <div
         id="mobile-menu"
         class="w-full md:hidden max-h-0 overflow-hidden transition-all duration-300"
@@ -47,7 +49,6 @@ export default {
       menu.classList.toggle("max-h-0");
       menu.classList.toggle("max-h-[1000px]");
       
-      // Pequeña optimización: si el menú se abre, deshabilitar scroll de body
       if (menu.classList.contains("max-h-[1000px]")) {
         document.body.style.overflow = 'hidden';
       } else {
@@ -58,11 +59,10 @@ export default {
       document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
         anchor.addEventListener("click", (e) => {
           e.preventDefault();
-          document.querySelector(this.getAttribute("href"))?.scrollIntoView({
+          document.querySelector(anchor.getAttribute("href"))?.scrollIntoView({
             behavior: "smooth",
           });
 
-          // Cerrar menú móvil si está abierto
           const menu = document.getElementById("mobile-menu");
           if (menu.classList.contains("max-h-[1000px]")) {
             this.toggleMenu();
