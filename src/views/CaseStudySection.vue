@@ -2,7 +2,6 @@
   <section id="casos" class="py-16 md:py-24 bg-gradient-to-br from-gray-50 to-white">
     <div class="container mx-auto px-6 sm:px-12">
       <div class="flex flex-col md:flex-row items-center gap-8 md:gap-20">
-        <!-- Contenido textual (sin cambios) -->
         <div class="md:w-1/2 md:pr-10">
           <span class="inline-block mb-6 md:mb-8 px-4 md:px-6 py-2 md:py-2.5 bg-blue-100 text-blue-600 rounded-full text-sm md:text-base font-bold uppercase tracking-wider">
             CASO DE ÉXITO
@@ -45,7 +44,7 @@
           </div>
         </div>
 
-        <!-- Imagen (oculta en móvil, visible en desktop) -->
+        
         <div class="hidden md:block md:w-1/2 relative">
           <img
             src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80"

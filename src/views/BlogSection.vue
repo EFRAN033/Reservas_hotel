@@ -160,8 +160,7 @@ export default {
   mounted() {
     this.calculateDimensions();
     window.addEventListener('resize', this.calculateDimensions);
-    
-    // Auto-scroll para demostración (opcional)
+
     setInterval(() => {
       this.centerIndex = (this.centerIndex + 1) % this.posts.length;
       this.scrollToCenter();
@@ -222,7 +221,6 @@ export default {
   scroll-snap-align: center;
 }
 
-/* Efecto de zoom para la tarjeta central */
 .scale-100 {
   transform: scale(1);
   z-index: 10;

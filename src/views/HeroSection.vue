@@ -13,7 +13,7 @@
     <div class="container relative mx-auto px-6">
       <div class="flex flex-col items-center lg:flex-row">
         <!-- Columna de texto -->
-        <div class="mb-12 lg:mb-0 lg:w-1/2 lg:pr-10">
+        <div class="mb-12 lg:mb-0 lg:w-1/2 lg:pr-10 animate-slide-in-left">
           <!-- Badge de novedad con efecto de atención -->
           <div class="mb-6 inline-flex animate-bounce items-center rounded-full bg-gradient-to-r from-blue-600 to-teal-500 px-6 py-2 text-sm font-semibold text-white shadow-lg shadow-blue-400/30 transition-all hover:shadow-blue-400/50">
             <span class="mr-2 inline-block h-2 w-2 animate-pulse rounded-full bg-white"></span>
@@ -34,9 +34,9 @@
             con tecnología de vanguardia.
           </p>
 
-                    <!-- CTA Principal y secundario -->
+          <!-- CTA Principal y secundario -->
           <div class="mb-10 flex flex-col space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
-            <!-- Botón "Ver categorías" (ahora con router-link) -->
+            
             <router-link
               to="/afiliados"
               class="flex items-center justify-center rounded-xl bg-gradient-to-r from-blue-600 to-teal-500 px-8 py-4 text-lg font-bold text-white shadow-lg transition-all duration-300 hover:from-blue-700 hover:to-teal-600 hover:shadow-xl hover:shadow-blue-400/30 group"
@@ -58,7 +58,7 @@
               </svg>
             </router-link>
 
-            <!-- Botón secundario (se mantiene igual) -->
+            
             <a
               href="#features"
               class="flex items-center justify-center rounded-xl border-2 border-gray-300 px-8 py-4 text-lg font-semibold text-gray-700 transition-all duration-300 hover:border-blue-500 hover:text-blue-600"
@@ -87,7 +87,7 @@
             </a>
           </div>
 
-          <!-- Social proof con avatares y ratings -->
+         
           <div class="flex items-center">
             <div class="flex -space-x-3">
               <img
@@ -151,9 +151,9 @@
         </div>
 
         <!-- Columna de imagen -->
-        <div class="lg:w-1/2">
+        <div class="lg:w-1/2 animate-slide-in-right">
           <div class="relative">
-            <!-- Imagen principal con efecto 3D -->
+            
             <div class="relative overflow-hidden rounded-3xl shadow-2xl">
               <img
                 class="h-auto w-full transform transition-all duration-500 hover:scale-105"
@@ -226,7 +226,7 @@
     </div>
 
     <!-- Logos de empresas clientes (social proof) -->
-    <div class="container mx-auto mt-16 px-6">
+    <div class="container mx-auto mt-16 px-6 animate-slide-in-bottom">
       <p class="mb-6 text-center text-sm font-medium uppercase tracking-wider text-gray-500">
         Confiado por equipos de todo el mundo
       </p>
@@ -244,11 +244,21 @@
 <script>
 export default {
   name: "HeroSection",
+  mounted() {
+    
+    const elements = document.querySelectorAll('.animate-slide-in-left, .animate-slide-in-right, .animate-slide-in-bottom');
+    elements.forEach(el => {
+      el.style.opacity = '0';
+      setTimeout(() => {
+        el.style.opacity = '1';
+      }, 10);
+    });
+  }
 };
 </script>
 
 <style>
-/* Animaciones personalizadas */
+
 @keyframes float {
   0%,
   100% {
@@ -263,14 +273,60 @@ export default {
   animation: float 6s ease-in-out infinite;
 }
 
-/* Transición para elementos interactivos */
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInBottom {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.8s ease-out forwards;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.8s ease-out forwards;
+}
+
+.animate-slide-in-bottom {
+  animation: slideInBottom 0.8s ease-out forwards;
+}
+
+
 .transition-all {
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 300ms;
 }
 
-/* Efecto de gradiente animado para el título */
+
 .gradient-text {
   background-size: 200% auto;
   animation: gradient-shift 3s ease infinite;

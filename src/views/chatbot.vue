@@ -1,4 +1,3 @@
-<!-- src/components/ChatbotProveo.vue -->
 <template>
     <div class="fixed bottom-8 right-8 z-[9999]">
       <!-- Bola flotante -->

@@ -2,7 +2,6 @@
     <header class="fixed w-full bg-white shadow-sm z-50">
       <div class="container mx-auto px-4 py-3">
         <div class="flex items-center justify-between">
-          <!-- Botón de retroceso mejorado -->
           <button 
             @click="goBack"
             class="group flex items-center space-x-1 p-2 rounded-lg hover:bg-gray-50 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
@@ -17,23 +16,21 @@
             <span class="text-sm font-medium text-gray-600 group-hover:text-blue-600 hidden sm:inline">Volver</span>
           </button>
           
-          <!-- Logo o título opcional -->
           <h1 class="text-lg font-semibold text-gray-800">
             <span class="bg-gradient-to-r from-blue-600 to-teal-500 bg-clip-text text-transparent">
               Nuestros Proveedores
             </span>
           </h1>
           
-          <!-- Espacio balanceado -->
           <div class="w-10"></div>
         </div>
       </div>
     </header>
   
-    <!-- Sección de Afiliados mejorada -->
+
     <section id="afiliados" class="pt-24 pb-16 bg-gradient-to-b from-gray-50 to-white">
       <div class="container mx-auto px-4 sm:px-6">
-        <!-- Encabezado mejorado -->
+
         <div class="text-center mb-16 px-4">
           <span class="inline-block px-3 py-1 text-xs font-semibold text-blue-600 bg-blue-100 rounded-full mb-3">
             RED DE PROVEEDORES
@@ -48,7 +45,6 @@
           </p>
         </div>
   
-        <!-- Filtros de categoría (nuevo elemento) -->
         <div class="flex flex-wrap justify-center gap-3 mb-12 px-4">
           <button 
             v-for="category in categories" 
@@ -65,9 +61,7 @@
           </button>
         </div>
   
-        <!-- Grid de categorías mejorado -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4">
-          <!-- Tarjeta mejorada - Prendas -->
           <div 
             class="bg-white rounded-2xl shadow-sm overflow-hidden hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-blue-100 transform hover:-translate-y-1"
             @mouseenter="hoverCard = 'prendas'"
@@ -297,14 +291,12 @@ export default {
     },
     filterByCategory(categoryId) {
       this.activeCategory = categoryId;
-      // Lógica de filtrado aquí
     }
   }
 };
 </script>
   
   <style scoped>
-  /* Animación para la flecha de retroceso */
   button:hover svg {
     animation: bounceLeft 0.5s ease infinite alternate;
   }
@@ -318,12 +310,10 @@ export default {
     }
   }
   
-  /* Ajuste de padding para el header fijo */
   section {
     padding-top: 5rem;
   }
   
-  /* Efecto hover para las tarjetas */
   .card-hover-effect {
     transition: all 0.3s ease;
   }

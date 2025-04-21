@@ -212,7 +212,7 @@ export default {
           ],
         },
       ],
-      currentSlide: 1, // Comienza con la tarjeta central
+      currentSlide: 1,
     };
   },
   methods: {
@@ -241,12 +241,11 @@ export default {
   z-index: 10;
 }
 
-/* Ajustes para el carrusel */
+
 .transition-transform {
   transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
-/* Sombra más pronunciada para la tarjeta elevada */
 .shadow-xl {
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }

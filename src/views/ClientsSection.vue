@@ -75,15 +75,15 @@ export default {
         { name: "Maersk", logo: cliente6 },
         { name: "Coca Cola", logo: cliente7 }
       ],
-      carruselSpeed: 30 // Segundos para completar una vuelta
+      carruselSpeed: 30 
     };
   },
   computed: {
     duplicatedClients() {
-      return [...this.clients, ...this.clients]; // Duplicamos para efecto infinito
+      return [...this.clients, ...this.clients]; 
     },
     carruselWidth() {
-      return `${this.clients.length * 160}px`; // Ancho total del carrusel
+      return `${this.clients.length * 160}px`; 
     }
   },
   mounted() {
@@ -114,12 +114,12 @@ export default {
 </script>
 
 <style scoped>
-/* Estilos específicos para el carrusel */
+
 .carrusel-track {
-  will-change: transform; /* Optimización para animaciones */
+  will-change: transform; 
 }
 
-/* Asegurar que las imágenes no se deformen */
+
 img {
   object-fit: contain;
   height: auto;

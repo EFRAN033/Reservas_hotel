@@ -44,7 +44,7 @@ export default {
     CtaSection,
     ClientsSection,
     Footer,
-    ChatbotProveo // Registra el componente del chatbot
+    ChatbotProveo
   }
 };
 </script>

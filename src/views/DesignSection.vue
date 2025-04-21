@@ -2,7 +2,6 @@
   <section class="py-16 md:py-24 bg-gradient-to-br from-gray-50 to-white">
     <div class="container mx-auto px-6 sm:px-8 md:px-12">
       <div class="flex flex-col md:flex-row items-center gap-8 md:gap-16">
-        <!-- Contenido textual (ahora primero en móvil) -->
         <div class="md:w-1/2 order-2 md:order-1">
           <span class="inline-block mb-4 px-5 py-2 bg-blue-100 text-blue-600 rounded-full text-sm font-bold uppercase tracking-wider">
             INNOVACIÓN
@@ -50,8 +49,6 @@
             </a>
           </div>
         </div>
-
-        <!-- Imagen con elemento flotante (oculta en móvil) -->
         <div class="hidden md:block md:w-1/2 order-1 md:order-2">
           <div class="relative">
             <img

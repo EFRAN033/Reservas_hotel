@@ -2,7 +2,6 @@
   <header class="fixed w-full bg-white shadow-md z-50">
     <div class="w-full px-4 py-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
       <div class="flex items-center justify-between">
-        <!-- Logo completamente pegado a la izquierda -->
         <div class="text-2xl font-bold -ml-3 transform translate-x-1">
           <span class="text-blue-600">Pro</span>
           <span class="text-blue-800">Veo</span>
