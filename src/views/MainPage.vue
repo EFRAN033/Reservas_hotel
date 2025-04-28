@@ -11,8 +11,6 @@
     <TestimonialSection />
     <CtaSection />
     <Footer />
-    
-    <!-- Componente Chatbot integrado -->
     <ChatbotProveo />
   </div>
 </template>

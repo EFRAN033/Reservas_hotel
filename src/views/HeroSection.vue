@@ -36,7 +36,7 @@
 
           <!-- CTA Principal y secundario -->
           <div class="mb-10 flex flex-col space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
-            
+            <!-- Botón "Ver categorías" -->
             <router-link
               to="/afiliados"
               class="flex items-center justify-center rounded-xl bg-gradient-to-r from-blue-600 to-teal-500 px-8 py-4 text-lg font-bold text-white shadow-lg transition-all duration-300 hover:from-blue-700 hover:to-teal-600 hover:shadow-xl hover:shadow-blue-400/30 group"
@@ -58,7 +58,7 @@
               </svg>
             </router-link>
 
-            
+            <!-- Botón secundario -->
             <a
               href="#features"
               class="flex items-center justify-center rounded-xl border-2 border-gray-300 px-8 py-4 text-lg font-semibold text-gray-700 transition-all duration-300 hover:border-blue-500 hover:text-blue-600"
@@ -87,64 +87,64 @@
             </a>
           </div>
 
-         
-          <div class="flex items-center">
-            <div class="flex -space-x-3">
+          <!-- Social proof con avatares y ratings - Versión responsive -->
+          <div class="flex flex-col sm:flex-row items-center gap-4 sm:gap-0">
+            <div class="flex -space-x-3 shrink-0">
               <img
-                class="h-12 w-12 rounded-full border-2 border-white shadow-md"
+                class="h-10 w-10 sm:h-12 sm:w-12 rounded-full border-2 border-white shadow-md"
                 src="https://randomuser.me/api/portraits/women/44.jpg"
                 alt="Cliente satisfecho"
                 loading="lazy"
               />
               <img
-                class="h-12 w-12 rounded-full border-2 border-white shadow-md"
+                class="h-10 w-10 sm:h-12 sm:w-12 rounded-full border-2 border-white shadow-md"
                 src="https://randomuser.me/api/portraits/men/32.jpg"
                 alt="Cliente satisfecho"
                 loading="lazy"
               />
               <img
-                class="h-12 w-12 rounded-full border-2 border-white shadow-md"
+                class="h-10 w-10 sm:h-12 sm:w-12 rounded-full border-2 border-white shadow-md"
                 src="https://randomuser.me/api/portraits/women/68.jpg"
                 alt="Cliente satisfecho"
                 loading="lazy"
               />
-              <div class="flex h-12 w-12 items-center justify-center rounded-full border-2 border-white bg-blue-600 text-xs font-bold text-white shadow-md">
+              <div class="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full border-2 border-white bg-blue-600 text-xs font-bold text-white shadow-md">
                 +2.5K
               </div>
             </div>
-            <div class="ml-4">
-              <div class="flex items-center">
+            <div class="text-center sm:text-left sm:ml-4">
+              <div class="flex items-center justify-center sm:justify-start">
                 <div class="flex text-yellow-400">
-                  <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                  <svg class="h-4 w-4 sm:h-5 sm:w-5" fill="currentColor" viewBox="0 0 20 20">
                     <path
                       d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
                     ></path>
                   </svg>
-                  <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                  <svg class="h-4 w-4 sm:h-5 sm:w-5" fill="currentColor" viewBox="0 0 20 20">
                     <path
                       d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
                     ></path>
                   </svg>
-                  <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                  <svg class="h-4 w-4 sm:h-5 sm:w-5" fill="currentColor" viewBox="0 0 20 20">
                     <path
                       d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
                     ></path>
                   </svg>
-                  <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                  <svg class="h-4 w-4 sm:h-5 sm:w-5" fill="currentColor" viewBox="0 0 20 20">
                     <path
                       d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
                     ></path>
                   </svg>
-                  <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                  <svg class="h-4 w-4 sm:h-5 sm:w-5" fill="currentColor" viewBox="0 0 20 20">
                     <path
                       d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
                     ></path>
                   </svg>
                 </div>
-                <span class="ml-2 text-sm font-medium text-gray-600">4.9 (2,500+ reseñas)</span>
+                <span class="ml-2 text-sm font-medium text-gray-600">4.9 (2.5K+)</span>
               </div>
-              <p class="mt-1 text-sm text-gray-500">
-                Empresas líderes en 15 países confían en nuestra solución
+              <p class="mt-1 text-xs sm:text-sm text-gray-500 leading-tight">
+                Empresas líderes en 15 países confían en nosotros
               </p>
             </div>
           </div>
@@ -153,7 +153,6 @@
         <!-- Columna de imagen -->
         <div class="lg:w-1/2 animate-slide-in-right">
           <div class="relative">
-            
             <div class="relative overflow-hidden rounded-3xl shadow-2xl">
               <img
                 class="h-auto w-full transform transition-all duration-500 hover:scale-105"
@@ -163,8 +162,6 @@
               />
               <div class="absolute inset-0 bg-gradient-to-t from-gray-900/20 to-blue-900/10"></div>
             </div>
-
-            <!-- Tarjeta flotante con métrica impactante -->
             <div
               class="absolute -bottom-6 -left-6 hidden rounded-xl bg-white p-5 shadow-2xl md:block"
             >
@@ -225,7 +222,7 @@
       </div>
     </div>
 
-    <!-- Logos de empresas clientes (social proof) -->
+    <!-- Logos de empresas clientes-->
     <div class="container mx-auto mt-16 px-6 animate-slide-in-bottom">
       <p class="mb-6 text-center text-sm font-medium uppercase tracking-wider text-gray-500">
         Confiado por equipos de todo el mundo
@@ -245,7 +242,7 @@
 export default {
   name: "HeroSection",
   mounted() {
-    
+    // Forzar repintado para asegurar que las animaciones se ejecuten
     const elements = document.querySelectorAll('.animate-slide-in-left, .animate-slide-in-right, .animate-slide-in-bottom');
     elements.forEach(el => {
       el.style.opacity = '0';
@@ -258,7 +255,7 @@ export default {
 </script>
 
 <style>
-
+/* Animaciones personalizadas */
 @keyframes float {
   0%,
   100% {
@@ -272,7 +269,6 @@ export default {
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }
-
 
 @keyframes slideInLeft {
   from {
@@ -319,14 +315,14 @@ export default {
   animation: slideInBottom 0.8s ease-out forwards;
 }
 
-
+/* Transición para elementos interactivos */
 .transition-all {
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 300ms;
 }
 
-
+/* Efecto de gradiente animado para el título */
 .gradient-text {
   background-size: 200% auto;
   animation: gradient-shift 3s ease infinite;

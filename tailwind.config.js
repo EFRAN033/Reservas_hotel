@@ -4,7 +4,7 @@ export default {
     "./index.html",
     "./src/**/*.{vue,js,ts,jsx,tsx}",
   ],
-  darkMode: 'class', // Habilita el modo oscuro manual con clases
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {

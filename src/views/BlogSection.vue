@@ -1,7 +1,6 @@
 <template>
   <section id="blog" class="py-16 bg-white">
     <div class="container mx-auto px-4 sm:px-6">
-      <!-- Encabezado compacto -->
       <div class="text-center mb-12 max-w-2xl mx-auto">
         <p class="text-blue-600 font-medium mb-3 text-sm uppercase tracking-wider">Blog especializado</p>
         <h2 class="text-3xl font-bold text-gray-900 mb-4">Optimiza tu cadena de suministro</h2>
@@ -107,7 +106,7 @@
         </div>
       </div>
 
-      <!-- CTA compacto -->
+      <!-- CTA -->
       <div class="text-center mt-10">
         <a
           href="#"
@@ -173,7 +172,7 @@ export default {
     calculateDimensions() {
       if (this.$refs.carousel) {
         this.carouselWidth = this.$refs.carousel.offsetWidth;
-        this.itemWidth = this.carouselWidth * 0.8; // 80% del ancho del carrusel
+        this.itemWidth = this.carouselWidth * 0.8; 
       }
     },
     handleScroll() {

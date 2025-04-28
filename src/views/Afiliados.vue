@@ -102,7 +102,7 @@
             </div>
           </div>
   
-          <!-- Tarjeta mejorada - Suministros -->
+          <!-- Tarjeta - Suministros -->
           <div 
             class="bg-white rounded-2xl shadow-sm overflow-hidden hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-blue-100 transform hover:-translate-y-1"
             @mouseenter="hoverCard = 'suministros'"
@@ -140,7 +140,7 @@
             </div>
           </div>
   
-          <!-- Tarjeta mejorada - Recursos -->
+          <!-- Tarjeta - Recursos -->
           <div 
             class="bg-white rounded-2xl shadow-sm overflow-hidden hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-blue-100 transform hover:-translate-y-1"
             @mouseenter="hoverCard = 'recursos'"
@@ -179,7 +179,7 @@
           </div>
         </div>
   
-        <!-- Sección de beneficios mejorada -->
+        <!-- Sección de beneficios -->
         <div class="mt-20 bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100">
           <div class="grid md:grid-cols-2 gap-0">
             <div class="p-10 md:p-12">

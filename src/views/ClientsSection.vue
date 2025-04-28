@@ -29,7 +29,7 @@
         </div>
       </div>
 
-      <!-- Versión Mobile: Carrusel automático -->
+      <!-- Versión Mobile Carrusel automático -->
       <div class="md:hidden relative overflow-hidden h-24 w-full">
         <div 
           class="absolute top-0 left-0 flex items-center h-full carrusel-track"

@@ -230,7 +230,6 @@ export default {
 </script>
 
 <style scoped>
-/* Efecto de elevación */
 .transform {
   transition: all 0.3s ease-in-out;
 }

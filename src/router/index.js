@@ -15,7 +15,7 @@ import HeroSection from '../views/HeroSection.vue';
 import PricingSection from '../views/PricingSection.vue';
 import StatsSection from '../views/StatsSection.vue';
 import TestimonialSection from '../views/TestimonialSection.vue';
-import Afileados from '../views/Afiliados.vue'; // Asegúrate de que la ruta sea correcta
+import Afileados from '../views/Afiliados.vue';
 import chatbot from '../views/chatbot.vue';
 
 // Definición de rutas
@@ -51,7 +51,6 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes,
   scrollBehavior(to, from, savedPosition) {
-    // Scroll al inicio de la página al cambiar de ruta
     return { top: 0 };
   }
 });
