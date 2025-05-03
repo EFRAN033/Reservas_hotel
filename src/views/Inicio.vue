@@ -11,8 +11,11 @@
         loading="eager"
       />
 
-      <!-- Logo circular (tamaños preservados) -->
-      <div class="absolute left-6 top-6 w-32 h-32 rounded-full border-2 border-white/90 shadow-xl overflow-hidden z-50 bg-white/95 hover:bg-white transition-all duration-300 hover:shadow-2xl">
+      <!-- Logo circular (tamaños preservados) - Ahora es clickeable -->
+      <div 
+        @click="irAAdmin"
+        class="absolute left-6 top-6 w-32 h-32 rounded-full border-2 border-white/90 shadow-xl overflow-hidden z-50 bg-white/95 hover:bg-white transition-all duration-300 hover:shadow-2xl cursor-pointer"
+      >
         <img 
           src="../assets/imagenes/hilton.svg" 
           alt="Logo Hotel" 
@@ -134,6 +137,11 @@ const showAdminPanel = computed(() => {
          currentPath === '/inicio' + '/' ||
          currentPath === '/inicio' + '';
 });
+
+// Nueva función para redirigir al admin
+const irAAdmin = () => {
+  router.push('/admin');
+};
 
 const cerrarSesion = () => {
   localStorage.removeItem('isAuthenticated');
