@@ -156,18 +156,24 @@
                 </div>
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
-                <div class="flex space-x-2">
+                <div class="flex flex-wrap gap-2">
                   <span 
-                    v-if="reserva.adicionales.desayuno" 
+                    v-if="tieneServicio(reserva, 1)" 
                     class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800"
                   >
                     <i class="fas fa-coffee mr-1"></i> Desayuno
                   </span>
                   <span 
-                    v-if="reserva.adicionales.estacionamiento" 
+                    v-if="tieneServicio(reserva, 15)" 
                     class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-teal-100 text-teal-800"
                   >
                     <i class="fas fa-parking mr-1"></i> Parking
+                  </span>
+                  <span 
+                    v-if="tieneServicio(reserva, 17)" 
+                    class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-pink-100 text-pink-800"
+                  >
+                    <i class="fas fa-spa mr-1"></i> SPA
                   </span>
                 </div>
               </td>
@@ -360,6 +366,9 @@ export default {
     this.cargarReservas();
   },
   methods: {
+    tieneServicio(reserva, servicioId) {
+      return reserva.serviciosAdicionales?.includes(servicioId) || false;
+    },
     cargarReservas() {
       const reservasGuardadas = localStorage.getItem('reservasHotel');
       if (reservasGuardadas) {
@@ -368,7 +377,7 @@ export default {
     },
     refrescarDatos() {
       this.cargarReservas();
-      },
+    },
     exportarExcel() {
       if (this.reservas.length === 0) {
         alert('No hay reservas para exportar');
@@ -385,8 +394,9 @@ export default {
         'Noches': this.calcularNoches(reserva.checkIn, reserva.checkOut),
         'Tipo Habitación': reserva.tipoHabitacion,
         'N° Habitación': reserva.numeroHabitacion,
-        'Desayuno': reserva.adicionales.desayuno ? 'Sí' : 'No',
-        'Estacionamiento': reserva.adicionales.estacionamiento ? 'Sí' : 'No',
+        'Desayuno': this.tieneServicio(reserva, 1) ? 'Sí' : 'No',
+        'Estacionamiento': this.tieneServicio(reserva, 15) ? 'Sí' : 'No',
+        'SPA': this.tieneServicio(reserva, 17) ? 'Sí' : 'No',
         'Total (S/)': reserva.total.toFixed(2),
         'Fecha Registro': this.formatFechaExcel(reserva.fechaCreacion)
       }));
@@ -398,7 +408,7 @@ export default {
       // Estilos para el Excel
       const headerStyle = {
         font: { bold: true, color: { rgb: "FFFFFF" } },
-        fill: { fgColor: { rgb: "4F46E5" } }, // Color indigo-600
+        fill: { fgColor: { rgb: "4F46E5" } },
         alignment: { horizontal: "center" }
       };
       
@@ -412,18 +422,11 @@ export default {
       
       // Ajustar el ancho de las columnas
       ws['!cols'] = [
-        { wch: 20 }, // Nombre
-        { wch: 12 }, // Tipo Documento
-        { wch: 15 }, // N° Documento
-        { wch: 12 }, // Check-in
-        { wch: 12 }, // Check-out
-        { wch: 8 },  // Noches
-        { wch: 15 }, // Tipo Habitación
-        { wch: 12 }, // N° Habitación
-        { wch: 10 }, // Desayuno
-        { wch: 12 }, // Estacionamiento
-        { wch: 12 }, // Total
-        { wch: 18 }  // Fecha Registro
+        { wch: 20 }, { wch: 12 }, { wch: 15 }, 
+        { wch: 12 }, { wch: 12 }, { wch: 8 },
+        { wch: 15 }, { wch: 12 }, { wch: 10 },
+        { wch: 10 }, { wch: 10 }, { wch: 12 },
+        { wch: 18 }
       ];
 
       XLSX.utils.book_append_sheet(wb, ws, "Reservas");
@@ -431,16 +434,9 @@ export default {
       // Generar archivo
       const fecha = new Date().toISOString().slice(0, 10);
       XLSX.writeFile(wb, `Reservas_Hotel_${fecha}.xlsx`);
-
-      alert('Archivo Excel generado correctamente');
     },
     formatFechaExcel(fecha) {
-      const date = new Date(fecha);
-      return date.toLocaleDateString('es-PE', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric'
-      });
+      return new Date(fecha).toLocaleDateString('es-PE');
     },
     formatFecha(fecha) {
       return new Date(fecha).toLocaleDateString('es-PE', {
@@ -473,6 +469,7 @@ export default {
     editarReserva(reserva) {
       // Implementar lógica de edición según tus necesidades
       console.log('Editar reserva:', reserva);
+      // this.$router.push({ name: 'editar-reserva', params: { id: reserva.id } });
     },
     prevPage() {
       if (this.pagination.currentPage > 1) {
