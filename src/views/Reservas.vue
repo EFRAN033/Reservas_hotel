@@ -1,5 +1,5 @@
 <template>
-  <div class="p-6">
+  <div class="p-6 h-screen flex flex-col">
     <!-- Título y acciones -->
     <div class="flex justify-between items-center mb-6">
       <div>
@@ -16,133 +16,155 @@
       </div>
     </div>
 
-    <!-- Formulario en dos columnas -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <!-- Columna izquierda -->
-      <div class="space-y-4">
-        <!-- Tarjeta de datos personales -->
-        <div class="bg-white rounded-lg shadow-md p-4 border border-gray-100">
-          <h3 class="font-semibold text-gray-800 mb-3 flex items-center">
-            <i class="fas fa-user-circle mr-2"></i> Datos del Huésped
-          </h3>
-          <div class="space-y-3">
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2">Nombre completo*</label>
-              <input type="text" v-model="reserva.nombre" placeholder="Nombre completo" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+    <!-- Contenedor principal con scroll -->
+    <div class="flex-1 overflow-y-auto">
+      <!-- Formulario en dos columnas -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Columna izquierda -->
+        <div class="space-y-4">
+          <!-- Tarjeta de datos personales -->
+          <div class="bg-white rounded-lg shadow-md p-4 border border-gray-100">
+            <h3 class="font-semibold text-gray-800 mb-3 flex items-center">
+              <i class="fas fa-user-circle mr-2"></i> Datos del Huésped
+            </h3>
+            <div class="space-y-3">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Nombre completo*</label>
+                <input type="text" v-model="reserva.nombre" placeholder="Nombre completo" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+              </div>
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Tipo de documento*</label>
+                  <select v-model="reserva.tipoDocumento" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    <option value="DNI">DNI</option>
+                    <option value="CE">Carné Extranjería</option>
+                    <option value="PAS">Pasaporte</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">Número de documento*</label>
+                  <input type="text" v-model="reserva.numeroDocumento" placeholder="Número" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                </div>
+              </div>
             </div>
+          </div>
+
+          <!-- Tarjeta de fechas -->
+          <div class="bg-white rounded-lg shadow-md p-4 border border-gray-100">
+            <h3 class="font-semibold text-gray-800 mb-3 flex items-center">
+              <i class="far fa-calendar-alt mr-2"></i> Fechas de Estadía
+            </h3>
             <div class="grid grid-cols-2 gap-4">
               <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">Tipo de documento*</label>
-                <select v-model="reserva.tipoDocumento" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                  <option value="DNI">DNI</option>
-                  <option value="CE">Carné Extranjería</option>
-                  <option value="PAS">Pasaporte</option>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Check-in*</label>
+                <input type="date" v-model="reserva.checkIn" @change="validarFechas" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Check-out*</label>
+                <input type="date" v-model="reserva.checkOut" @change="validarFechas" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+              </div>
+            </div>
+            <div v-if="diasEstadia > 0" class="mt-2 text-sm text-blue-600">
+              Estadía de {{ diasEstadia }} noche{{ diasEstadia !== 1 ? 's' : '' }}
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna derecha -->
+        <div class="space-y-4">
+          <!-- Tarjeta de habitación -->
+          <div class="bg-white rounded-lg shadow-md p-4 border border-gray-100">
+            <h3 class="font-semibold text-gray-800 mb-3 flex items-center">
+              <i class="fas fa-bed mr-2"></i> Detalles de Habitación
+            </h3>
+            <div class="space-y-3">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Tipo de habitación*</label>
+                <select v-model="reserva.tipoHabitacion" @change="actualizarHabitaciones" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                  <option value="">Seleccionar tipo</option>
+                  <option value="SIMPLE">Simple</option>
+                  <option value="DOBLE">Doble</option>
+                  <option value="SUITE">Suite</option>
                 </select>
               </div>
               <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">Número de documento*</label>
-                <input type="text" v-model="reserva.numeroDocumento" placeholder="Número" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                <label class="block text-sm font-medium text-gray-700 mb-2">N° Habitación*</label>
+                <select v-model="reserva.numeroHabitacion" :disabled="!reserva.tipoHabitacion" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                  <option value="">Seleccionar habitación</option>
+                  <option v-for="hab in habitacionesDisponibles" :key="hab.numero" :value="hab.numero">
+                    {{ hab.numero }} ({{ hab.estado }})
+                  </option>
+                </select>
               </div>
             </div>
           </div>
-        </div>
 
-        <!-- Tarjeta de fechas -->
-        <div class="bg-white rounded-lg shadow-md p-4 border border-gray-100">
-          <h3 class="font-semibold text-gray-800 mb-3 flex items-center">
-            <i class="far fa-calendar-alt mr-2"></i> Fechas de Estadía
-          </h3>
-          <div class="grid grid-cols-2 gap-4">
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2">Check-in*</label>
-              <input type="date" v-model="reserva.checkIn" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2">Check-out*</label>
-              <input type="date" v-model="reserva.checkOut" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Columna derecha -->
-      <div class="space-y-4">
-        <!-- Tarjeta de habitación -->
-        <div class="bg-white rounded-lg shadow-md p-4 border border-gray-100">
-          <h3 class="font-semibold text-gray-800 mb-3 flex items-center">
-            <i class="fas fa-bed mr-2"></i> Detalles de Habitación
-          </h3>
-          <div class="space-y-3">
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2">Tipo de habitación*</label>
-              <select v-model="reserva.tipoHabitacion" @change="actualizarHabitaciones" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                <option value="">Seleccionar tipo</option>
-                <option value="SIMPLE">Simple</option>
-                <option value="DOBLE">Doble</option>
-                <option value="SUITE">Suite</option>
-              </select>
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2">N° Habitación*</label>
-              <select v-model="reserva.numeroHabitacion" :disabled="!reserva.tipoHabitacion" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                <option value="">Seleccionar habitación</option>
-                <option v-for="hab in habitacionesDisponibles" :key="hab.numero" :value="hab.numero">
-                  {{ hab.numero }} ({{ hab.estado }})
-                </option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <!-- Tarjeta de adicionales -->
-        <div class="bg-white rounded-lg shadow-md p-4 border border-gray-100">
-          <h3 class="font-semibold text-gray-800 mb-3 flex items-center">
-            <i class="fas fa-concierge-bell mr-2"></i> Servicios Adicionales
-          </h3>
-          <div class="space-y-3">
-            <!-- Botón para abrir el modal de servicios -->
-            <button @click="mostrarModalServicios" class="w-full px-4 py-3 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition flex items-center justify-between">
-              <span>Seleccionar servicios adicionales</span>
-              <i class="fas fa-chevron-right"></i>
-            </button>
-            
-            <!-- Lista de servicios seleccionados -->
-            <div v-if="serviciosSeleccionados.length > 0" class="mt-3">
-              <h4 class="text-sm font-medium text-gray-700 mb-2">Servicios seleccionados:</h4>
-              <div class="space-y-2">
-                <div v-for="servicio in serviciosSeleccionados" :key="servicio.id" class="flex justify-between items-center p-2 bg-gray-50 rounded">
-                  <span>{{ servicio.nombre }} (S/ {{ servicio.precio }})</span>
-                  <button @click="eliminarServicio(servicio.id)" class="text-red-500 hover:text-red-700">
-                    <i class="fas fa-times"></i>
-                  </button>
+          <!-- Tarjeta de adicionales -->
+          <div class="bg-white rounded-lg shadow-md p-4 border border-gray-100">
+            <h3 class="font-semibold text-gray-800 mb-3 flex items-center">
+              <i class="fas fa-concierge-bell mr-2"></i> Servicios Adicionales
+            </h3>
+            <div class="space-y-3">
+              <!-- Botón para abrir el modal de servicios -->
+              <button @click="mostrarModalServicios" class="w-full px-4 py-3 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition flex items-center justify-between">
+                <span>Seleccionar servicios adicionales</span>
+                <i class="fas fa-chevron-right"></i>
+              </button>
+              
+              <!-- Lista de servicios seleccionados -->
+              <div v-if="serviciosSeleccionados.length > 0" class="mt-3">
+                <h4 class="text-sm font-medium text-gray-700 mb-2">Servicios seleccionados:</h4>
+                <div class="space-y-2 max-h-48 overflow-y-auto">
+                  <div v-for="servicio in serviciosSeleccionados" :key="servicio.id" class="flex justify-between items-center p-2 bg-gray-50 rounded">
+                    <span>{{ servicio.nombre }} (S/ {{ servicio.precio }}) <span v-if="servicio.porNoche">× {{ diasEstadia }} noche{{ diasEstadia !== 1 ? 's' : '' }}</span></span>
+                    <span class="font-medium">S/ {{ servicio.porNoche ? (servicio.precio * diasEstadia).toFixed(2) : servicio.precio.toFixed(2) }}</span>
+                    <button @click="eliminarServicio(servicio.id)" class="text-red-500 hover:text-red-700">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Resumen y acciones -->
-    <div class="mt-8 pt-6 border-t border-gray-200">
-      <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
-        <div class="mb-4 md:mb-0">
-          <h3 class="text-lg font-semibold text-gray-800">Resumen</h3>
-          <div class="flex items-baseline mt-2">
-            <span class="text-2xl font-bold text-blue-600">S/ {{ calcularTotal().toFixed(2) }}</span>
-            <span class="ml-2 text-sm text-gray-500">Total</span>
+      <!-- Resumen y acciones -->
+      <div class="mt-8 pt-6 border-t border-gray-200">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
+          <div class="mb-4 md:mb-0">
+            <h3 class="text-lg font-semibold text-gray-800">Resumen</h3>
+            
+            <!-- Desglose del costo -->
+            <div class="mt-2 text-sm text-gray-600">
+              <div v-if="reserva.tipoHabitacion" class="flex justify-between py-1">
+                <span>Habitación {{ tipoHabitacionTexto[reserva.tipoHabitacion] }} ({{ diasEstadia }} noche{{ diasEstadia !== 1 ? 's' : '' }}):</span>
+                <span>S/ {{ (precioBaseHabitacion * diasEstadia).toFixed(2) }}</span>
+              </div>
+              
+              <div v-for="servicio in serviciosSeleccionados" :key="servicio.id" class="flex justify-between py-1">
+                <span>{{ servicio.nombre }} <span v-if="servicio.porNoche">({{ diasEstadia }} noche{{ diasEstadia !== 1 ? 's' : '' }})</span>:</span>
+                <span>S/ {{ (servicio.porNoche ? servicio.precio * diasEstadia : servicio.precio).toFixed(2) }}</span>
+              </div>
+            </div>
+            
+            <div class="flex items-baseline mt-2 pt-2 border-t">
+              <span class="text-2xl font-bold text-blue-600">S/ {{ calcularTotal().toFixed(2) }}</span>
+              <span class="ml-2 text-sm text-gray-500">Total</span>
+            </div>
+            
+            <div v-if="reservasGuardadas.length > 0" class="mt-2 text-sm text-gray-500">
+              Tienes {{ reservasGuardadas.length }} reserva(s) guardada(s)
+            </div>
           </div>
-          <div v-if="reservasGuardadas.length > 0" class="mt-2 text-sm text-gray-500">
-            Tienes {{ reservasGuardadas.length }} reserva(s) guardada(s)
+          <div class="flex space-x-3">
+            <button @click="cancelarReserva" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition">
+              Cancelar
+            </button>
+            <button @click="guardarReserva" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition flex items-center">
+              <i class="fas fa-save mr-2"></i> Guardar Reserva
+            </button>
           </div>
-        </div>
-        <div class="flex space-x-3">
-          <button @click="cancelarReserva" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition">
-            Cancelar
-          </button>
-          <button @click="guardarReserva" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition flex items-center">
-            <i class="fas fa-save mr-2"></i> Guardar Reserva
-          </button>
         </div>
       </div>
     </div>
@@ -240,15 +262,23 @@ export default {
         checkOut: '',
         tipoHabitacion: '',
         numeroHabitacion: '',
-        serviciosAdicionales: [] // Cambiamos a array para múltiples servicios
+        serviciosAdicionales: []
       },
       habitacionesDisponibles: [],
       reservasGuardadas: [],
       modalServiciosVisible: false,
       filtroCategoria: null,
-      // Base de datos de servicios
+      preciosHabitaciones: {
+        SIMPLE: 250,
+        DOBLE: 350,
+        SUITE: 500
+      },
+      tipoHabitacionTexto: {
+        'SIMPLE': 'Simple',
+        'DOBLE': 'Doble',
+        'SUITE': 'Suite'
+      },
       serviciosDisponibles: [
-        // Servicios de Alimentos Ampliados
         { id: 1, nombre: 'Desayuno Buffet', descripcion: 'Buffet internacional con variedad de opciones', precio: 45, categoria: 'alimentos', icono: 'fas fa-bread-slice', porNoche: true },
         { id: 2, nombre: 'Desayuno Continental', descripcion: 'Desayuno ligero con café, jugo y panadería', precio: 25, categoria: 'alimentos', icono: 'fas fa-coffee', porNoche: true },
         { id: 3, nombre: 'Desayuno Ejecutivo', descripcion: 'Incluye huevos al gusto y proteínas', precio: 35, categoria: 'alimentos', icono: 'fas fa-egg', porNoche: true },
@@ -263,8 +293,6 @@ export default {
         { id: 12, nombre: 'Cesta de Frutas', descripcion: 'Selección de frutas de temporada', precio: 30, categoria: 'alimentos', icono: 'fas fa-apple-whole' },
         { id: 13, nombre: 'Chocolates Premium', descripcion: 'Caja de chocolates artesanales', precio: 40, categoria: 'alimentos', icono: 'fas fa-candy-cane' },
         { id: 14, nombre: 'Brunch Dominical', descripcion: 'Combinación desayuno-almuerzo los domingos', precio: 70, categoria: 'alimentos', icono: 'fas fa-pancakes' },
-        
-        // Otros servicios (mantenidos del código original)
         { id: 15, nombre: 'Estacionamiento', descripcion: 'Espacio seguro para su vehículo', precio: 20, categoria: 'transporte', icono: 'fas fa-parking', porNoche: true },
         { id: 16, nombre: 'Late Check-out', descripcion: 'Check-out hasta las 3pm sin costo adicional', precio: 0, categoria: 'habitacion', icono: 'fas fa-clock' },
         { id: 17, nombre: 'SPA Completo', descripcion: 'Paquete completo de spa por 2 horas', precio: 150, categoria: 'bienestar', icono: 'fas fa-spa' },
@@ -276,7 +304,7 @@ export default {
         { id: 23, nombre: 'Flores y Chocolate', descripcion: 'Arreglo floral y caja de chocolates', precio: 45, categoria: 'regalos', icono: 'fas fa-gift' }
       ],
       categoriasServicios: [
-        { id: 'alimentos', nombre: 'Alimentos y Bebidas' }, // Actualizado el nombre
+        { id: 'alimentos', nombre: 'Alimentos y Bebidas' },
         { id: 'habitacion', nombre: 'Habitación' },
         { id: 'bienestar', nombre: 'Bienestar' },
         { id: 'transporte', nombre: 'Transporte' },
@@ -286,17 +314,23 @@ export default {
       ]
     }
   },
-        computed: {
-          serviciosSeleccionados() {
-        return this.reserva.serviciosAdicionales.map(servId => 
-          this.serviciosDisponibles.find(s => s.id === servId)
-        )
-      },
+  computed: {
+    serviciosSeleccionados() {
+      return this.reserva.serviciosAdicionales.map(servId => 
+        this.serviciosDisponibles.find(s => s.id === servId)
+      )
+    },
     serviciosFiltrados() {
       if (!this.filtroCategoria) {
         return this.serviciosDisponibles
       }
       return this.serviciosDisponibles.filter(s => s.categoria === this.filtroCategoria)
+    },
+    diasEstadia() {
+      return this.calcularDiasEstadia()
+    },
+    precioBaseHabitacion() {
+      return this.preciosHabitaciones[this.reserva.tipoHabitacion] || 0
     }
   },
   mounted() {
@@ -346,20 +380,29 @@ export default {
         this.habitacionesDisponibles = []
       }
     },
+    validarFechas() {
+      if (this.reserva.checkIn && this.reserva.checkOut) {
+        const fechaInicio = new Date(this.reserva.checkIn)
+        const fechaFin = new Date(this.reserva.checkOut)
+        
+        if (fechaFin < fechaInicio) {
+          alert('La fecha de salida debe ser posterior a la de entrada')
+          this.reserva.checkOut = ''
+        }
+      }
+    },
     calcularTotal() {
       let total = 0
-      // Precio base por habitación
-      if (this.reserva.tipoHabitacion === 'SIMPLE') total = 250
-      else if (this.reserva.tipoHabitacion === 'DOBLE') total = 350
-      else if (this.reserva.tipoHabitacion === 'SUITE') total = 500
       
-      // Calcular días de estadía
-      const diasEstadia = this.calcularDiasEstadia()
+      // Precio base de la habitación por noches
+      if (this.reserva.tipoHabitacion) {
+        total = this.precioBaseHabitacion * this.diasEstadia
+      }
       
       // Sumar servicios adicionales
       this.serviciosSeleccionados.forEach(servicio => {
         if (servicio.porNoche) {
-          total += servicio.precio * diasEstadia
+          total += servicio.precio * this.diasEstadia
         } else {
           total += servicio.precio
         }
@@ -368,41 +411,50 @@ export default {
       return total
     },
     calcularDiasEstadia() {
-      if (!this.reserva.checkIn || !this.reserva.checkOut) return 1
+      if (!this.reserva.checkIn || !this.reserva.checkOut) return 0
       
       const fechaInicio = new Date(this.reserva.checkIn)
       const fechaFin = new Date(this.reserva.checkOut)
+      
+      if (fechaFin <= fechaInicio) return 0
+      
       const diffTime = fechaFin - fechaInicio
       const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
       
-      return diffDays > 0 ? diffDays : 1
+      return diffDays > 0 ? diffDays : 0
     },
     cargarReservas() {
-      const reservasGuardadas = localStorage.getItem('reservasHotel');
+      const reservasGuardadas = localStorage.getItem('reservasHotel')
       if (reservasGuardadas) {
-        this.reservasGuardadas = JSON.parse(reservasGuardadas);
+        this.reservasGuardadas = JSON.parse(reservasGuardadas)
       }
     },
     guardarReserva() {
       if (!this.reserva.nombre || !this.reserva.numeroDocumento || 
           !this.reserva.checkIn || !this.reserva.checkOut || 
           !this.reserva.tipoHabitacion || !this.reserva.numeroHabitacion) {
-        alert('Complete todos los campos obligatorios');
-        return;
+        alert('Complete todos los campos obligatorios')
+        return
+      }
+      
+      if (this.diasEstadia <= 0) {
+        alert('La fecha de salida debe ser posterior a la de entrada')
+        return
       }
       
       const nuevaReserva = {
         ...this.reserva,
         id: Date.now(),
         total: this.calcularTotal(),
-        fechaCreacion: new Date().toISOString()
-      };
+        fechaCreacion: new Date().toISOString(),
+        diasEstadia: this.diasEstadia
+      }
       
-      this.reservasGuardadas.push(nuevaReserva);
-      localStorage.setItem('reservasHotel', JSON.stringify(this.reservasGuardadas));
+      this.reservasGuardadas.push(nuevaReserva)
+      localStorage.setItem('reservasHotel', JSON.stringify(this.reservasGuardadas))
       
-      alert('Reserva guardada localmente');
-      this.nuevaReserva();
+      alert('Reserva guardada localmente')
+      this.nuevaReserva()
     },
     nuevaReserva() {
       this.reserva = {
@@ -414,39 +466,67 @@ export default {
         tipoHabitacion: '',
         numeroHabitacion: '',
         serviciosAdicionales: []
-      };
+      }
     },
     cancelarReserva() {
       if (confirm('¿Cancelar esta reserva sin guardar?')) {
-        this.nuevaReserva();
+        this.nuevaReserva()
       }
     },
     exportarReservas() {
       if (this.reservasGuardadas.length === 0) {
-        alert('No hay reservas para exportar');
-        return;
+        alert('No hay reservas para exportar')
+        return
       }
       
-      const dataStr = JSON.stringify(this.reservasGuardadas, null, 2);
-      const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+      const dataStr = JSON.stringify(this.reservasGuardadas, null, 2)
+      const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr)
       
-      const exportFileDefaultName = `reservas_hotel_${new Date().toISOString().slice(0,10)}.json`;
+      const exportFileDefaultName = `reservas_hotel_${new Date().toISOString().slice(0,10)}.json`
       
-      const linkElement = document.createElement('a');
-      linkElement.setAttribute('href', dataUri);
-      linkElement.setAttribute('download', exportFileDefaultName);
-      linkElement.click();
+      const linkElement = document.createElement('a')
+      linkElement.setAttribute('href', dataUri)
+      linkElement.setAttribute('download', exportFileDefaultName)
+      linkElement.click()
     }
   }
 }
 </script>
 
 <style scoped>
+/* Estilos para el scroll */
+.overflow-y-auto {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e0 #f7fafc;
+}
+
+.overflow-y-auto::-webkit-scrollbar {
+  width: 8px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-track {
+  background: #f7fafc;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb {
+  background-color: #cbd5e0;
+  border-radius: 6px;
+  border: 2px solid #f7fafc;
+}
+
 /* Transiciones suaves para el modal */
 .modal-enter-active, .modal-leave-active {
   transition: opacity 0.3s;
 }
 .modal-enter, .modal-leave-to {
   opacity: 0;
+}
+
+/* Asegurar que el contenedor principal ocupe toda la altura */
+.h-screen {
+  height: 100vh;
+}
+.flex-1 {
+  flex: 1 1 0%;
 }
 </style>
