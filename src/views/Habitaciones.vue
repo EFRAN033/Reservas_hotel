@@ -1,5 +1,5 @@
 <template>
-  <div class="p-6">
+  <div class="p-6 pb-24"> <!-- pb-24 para espacio moderado -->
     <!-- Encabezado -->
     <div class="flex justify-between items-center mb-6">
       <div>
@@ -89,6 +89,12 @@
             <i class="fas fa-users mr-2 text-blue-500"></i>
             <span>Capacidad: {{ habitacion.capacidad }} personas</span>
           </div>
+          <div class="flex items-center mb-3">
+            <i class="fas fa-toilet mr-2 text-blue-500"></i>
+            <span :class="{'text-green-600': habitacion.tieneBano, 'text-red-600': !habitacion.tieneBano}">
+              {{ habitacion.tieneBano ? 'Con baño privado' : 'Sin baño privado' }}
+            </span>
+          </div>
           <div class="flex items-center mb-4">
             <i class="fas fa-tag mr-2 text-blue-500"></i>
             <span class="font-semibold">S/ {{ habitacion.precioBase }} por noche</span>
@@ -124,6 +130,9 @@
         </div>
       </div>
     </div>
+
+    <!-- Espacio adicional moderado al final -->
+    <div class="h-32"></div>
 
     <!-- Modal para nueva/editar habitación -->
     <div v-if="modalVisible" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
@@ -168,11 +177,20 @@
               </div>
             </div>
             
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2">Estado*</label>
-              <select v-model="habitacionForm.estado" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                <option v-for="(estado, key) in estadoTexto" :key="key" :value="key">{{ estado }}</option>
-              </select>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Estado*</label>
+                <select v-model="habitacionForm.estado" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                  <option v-for="(estado, key) in estadoTexto" :key="key" :value="key">{{ estado }}</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Baño privado*</label>
+                <select v-model="habitacionForm.tieneBano" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                  <option :value="true">Sí</option>
+                  <option :value="false">No</option>
+                </select>
+              </div>
             </div>
             
             <div>
@@ -218,7 +236,8 @@ export default {
           capacidad: 1,
           precioBase: 250,
           estado: 'DISPONIBLE',
-          amenities: ['WiFi', 'TV', 'Aire acondicionado']
+          tieneBano: true,
+          amenities: ['WiFi', 'TV', 'Aire acondicionado', 'Baño privado']
         },
         {
           numero: '201',
@@ -227,7 +246,8 @@ export default {
           capacidad: 2,
           precioBase: 350,
           estado: 'OCUPADA',
-          amenities: ['WiFi', 'TV', 'Aire acondicionado', 'Minibar']
+          tieneBano: true,
+          amenities: ['WiFi', 'TV', 'Aire acondicionado', 'Minibar', 'Baño privado']
         },
         {
           numero: '301',
@@ -236,15 +256,17 @@ export default {
           capacidad: 2,
           precioBase: 500,
           estado: 'DISPONIBLE',
-          amenities: ['WiFi', 'TV', 'Aire acondicionado', 'Minibar', 'Jacuzzi']
+          tieneBano: true,
+          amenities: ['WiFi', 'TV', 'Aire acondicionado', 'Minibar', 'Jacuzzi', 'Baño privado']
         },
         {
           numero: '102',
           tipo: 'SIMPLE',
           piso: 1,
           capacidad: 1,
-          precioBase: 250,
+          precioBase: 200,
           estado: 'MANTENIMIENTO',
+          tieneBano: false,
           amenities: ['WiFi', 'TV']
         },
         {
@@ -252,8 +274,9 @@ export default {
           tipo: 'DOBLE',
           piso: 2,
           capacidad: 2,
-          precioBase: 350,
+          precioBase: 300,
           estado: 'LIMPIEZA',
+          tieneBano: false,
           amenities: ['WiFi', 'TV', 'Aire acondicionado']
         },
         {
@@ -261,9 +284,10 @@ export default {
           tipo: 'SUITE',
           piso: 3,
           capacidad: 2,
-          precioBase: 500,
+          precioBase: 450,
           estado: 'DISPONIBLE',
-          amenities: ['WiFi', 'TV', 'Aire acondicionado', 'Minibar']
+          tieneBano: true,
+          amenities: ['WiFi', 'TV', 'Aire acondicionado', 'Minibar', 'Baño privado']
         }
       ],
       habitacionForm: {
@@ -273,6 +297,7 @@ export default {
         capacidad: 1,
         precioBase: 0,
         estado: 'DISPONIBLE',
+        tieneBano: true,
         amenities: []
       },
       modalVisible: false,
@@ -293,7 +318,7 @@ export default {
       amenitiesDisponibles: [
         'WiFi', 'TV', 'Aire acondicionado', 'Minibar', 'Jacuzzi', 
         'Caja fuerte', 'Room service', 'Teléfono', 'Escritorio', 
-        'Plancha', 'Secador', 'Cafetera'
+        'Plancha', 'Secador', 'Cafetera', 'Baño privado'
       ],
       amenityIcons: {
         'WiFi': 'fas fa-wifi',
@@ -307,7 +332,8 @@ export default {
         'Escritorio': 'fas fa-desk',
         'Plancha': 'fas fa-iron',
         'Secador': 'fas fa-wind',
-        'Cafetera': 'fas fa-coffee'
+        'Cafetera': 'fas fa-coffee',
+        'Baño privado': 'fas fa-toilet'
       }
     }
   },
@@ -333,6 +359,7 @@ export default {
         capacidad: 1,
         precioBase: 0,
         estado: 'DISPONIBLE',
+        tieneBano: true,
         amenities: []
       }
       this.modoEdicion = false
@@ -376,7 +403,14 @@ export default {
       habitacion.estado = estados[nextIndex]
     },
     verDetalles(habitacion) {
-      alert(`Detalles de habitación ${habitacion.numero}\nTipo: ${this.tipoTexto[habitacion.tipo]}\nEstado: ${this.estadoTexto[habitacion.estado]}`)
+      alert(`Detalles de habitación ${habitacion.numero}\n
+Tipo: ${this.tipoTexto[habitacion.tipo]}\n
+Estado: ${this.estadoTexto[habitacion.estado]}\n
+Piso: ${habitacion.piso}\n
+Capacidad: ${habitacion.capacidad} personas\n
+Baño: ${habitacion.tieneBano ? 'Privado' : 'Compartido'}\n
+Precio: S/ ${habitacion.precioBase} por noche\n
+Servicios: ${habitacion.amenities.join(', ')}`)
     },
     exportarDatos() {
       const dataStr = JSON.stringify(this.habitaciones, null, 2)
@@ -402,5 +436,21 @@ export default {
 /* Sombra más pronunciada al hacer hover */
 .hover\:shadow-lg:hover {
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Colores para el estado del baño */
+.text-green-600 {
+  color: #16a34a;
+}
+.text-red-600 {
+  color: #dc2626;
+}
+
+/* Espacio adicional */
+.pb-24 {
+  padding-bottom: 6rem;
+}
+.h-32 {
+  height: 8rem;
 }
 </style>
