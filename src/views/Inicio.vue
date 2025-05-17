@@ -95,7 +95,7 @@
         </div>
       </div>
 
-      <!-- Contenido dinámico -->
+      <!-- Contenido dinámico para rutas hijas -->
       <div class="dynamic-content" :class="{'pt-8': showAdminPanel, 'pt-[calc(48px+16rem+4rem)]': !showAdminPanel}">
         <router-view></router-view>
       </div>
@@ -104,38 +104,41 @@
 </template>
 
 <script setup>
-import Sidebar from './sidebar.vue';
-import { useRouter, useRoute } from 'vue-router';
-import { computed } from 'vue';
+import Sidebar from './sidebar.vue'
+import { useRouter, useRoute } from 'vue-router'
+import { computed } from 'vue'
 
-const router = useRouter();
-const route = useRoute();
+const router = useRouter()
+const route = useRoute()
 
-// Obtener el título de la página según la ruta
+// Título dinámico según ruta hija actual
 const pageTitle = computed(() => {
   switch (route.name) {
-    case 'Inicio': return 'Bienvenido al Inicio';
-    case 'Analisis': return 'Análisis';
-    case 'Habitaciones': return 'Habitaciones';
-    case 'Reservas': return 'Reservas';
-    case 'Registro': return 'Registro de Usuario';
-    default: return 'Página no encontrada';
+    case 'Inicio': return 'Bienvenido al Inicio'
+    case 'Analisis': return 'Análisis'
+    case 'Habitaciones': return 'Habitaciones'
+    case 'Reservas': return 'Reservas'
+    case 'Registro': return 'Registro de Usuario'
+    case 'Admin': return 'Panel de Administración'
+    default: return 'Página no encontrada'
   }
-});
+})
 
+// Mostrar panel admin si la ruta es /inicio/admin
 const showAdminPanel = computed(() => {
-  return route.path === '/inicio' || route.path === '/inicio/';
-});
+  return route.name === 'Admin'
+})
 
-// Redirigir a Admin.vue
+// Función para ir a Admin.vue (ruta hija)
 const irAAdmin = () => {
-  router.push('/admin');
-};
+  router.push('/inicio/admin')
+}
 
+// Función para cerrar sesión y redirigir a login
 const cerrarSesion = () => {
-  localStorage.removeItem('isAuthenticated');
-  router.push('/login');
-};
+  localStorage.removeItem('isAuthenticated')
+  router.push('/login')
+}
 </script>
 
 <style scoped>
