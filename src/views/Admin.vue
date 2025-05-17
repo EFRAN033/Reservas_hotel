@@ -43,7 +43,7 @@
                 </svg>
                 <span>Editar Información</span>
               </button>
-              
+
               <button 
                 @click="cerrarSesion"
                 class="w-full flex items-center justify-center space-x-3 px-6 py-3 bg-red-600 text-white text-lg font-medium rounded-lg hover:bg-red-700 transition-transform duration-200"
@@ -65,8 +65,11 @@
 export default {
   methods: {
     cerrarSesion() {
-      // Lógica para cerrar sesión con confirmación
       if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
+        // Eliminar autenticación
+        localStorage.removeItem('isAuthenticated');
+        
+        // Redirigir al login
         this.$router.push('/login');
       }
     }

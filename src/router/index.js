@@ -70,15 +70,17 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log(`[Router] Intentando navegar a: ${to.path}`)
+  console.log(`[Router] Intentando navegar a: ${to.fullPath}`)
   const isAuthenticated = localStorage.getItem('isAuthenticated')
 
+  // Si intenta acceder a una ruta protegida sin autenticación
   if (to.meta.requiresAuth && !isAuthenticated) {
-    console.warn('[Router] Acceso no autorizado, redirigiendo a login')
+    console.warn('[Router] Acceso no autorizado, redirigiendo a /login')
     return next('/login')
   }
 
-  if (to.meta.hideForAuth && isAuthenticated) {
+  // Si está autenticado y quiere acceder a /login, redirigir a /inicio
+  if (to.meta.hideForAuth && isAuthenticated && to.path === '/login') {
     console.log('[Router] Usuario autenticado, redirigiendo a /inicio')
     return next('/inicio')
   }
