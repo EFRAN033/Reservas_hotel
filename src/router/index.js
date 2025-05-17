@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import login from '@/views/login.vue' // Importación en minúsculas para coincidir con el archivo
+import login from '@/views/login.vue'
 import Inicio from '@/views/Inicio.vue'
 import Analisis from '@/views/Analisis.vue'
 import Habitaciones from '@/views/Habitaciones.vue'
@@ -8,27 +8,17 @@ import Registro from '@/views/Registro.vue'
 import Admin from '@/views/Admin.vue'
 
 const routes = [
-  // Redirección raíz a login
-  {
-    path: '/',
-    redirect: '/login'
-  },
-  // Ruta de login (pública)
+  { path: '/', redirect: '/login' },
   {
     path: '/login',
     name: 'login',
     component: login,
-    meta: {
-      title: 'Inicio de Sesión',
-      public: true, // Ruta accesible sin autenticación
-      hideForAuth: true // Oculta esta ruta si el usuario está autenticado
-    }
+    meta: { title: 'Inicio de Sesión', public: true, hideForAuth: true }
   },
-  // Ruta principal protegida
   {
     path: '/inicio',
     component: Inicio,
-    meta: { requiresAuth: true }, // Protección de autenticación
+    meta: { requiresAuth: true },
     children: [
       {
         path: '',
@@ -59,20 +49,15 @@ const routes = [
         name: 'Registro',
         component: Registro,
         meta: { title: 'Registro de Usuario' }
+      },
+      {
+        path: 'admin',
+        name: 'Admin',
+        component: Admin,
+        meta: { title: 'Panel de Administración', requiresAuth: true }
       }
     ]
   },
-  // Ruta de administración
-  {
-    path: '/admin',
-    name: 'Admin',
-    component: Admin,
-    meta: {
-      title: 'Panel de Administración',
-      requiresAuth: true
-    }
-  },
-  // Ruta de captura para errores 404
   {
     path: '/:pathMatch(.*)*',
     redirect: '/login'
@@ -84,18 +69,15 @@ const router = createRouter({
   routes
 })
 
-// Guardia de navegación mejorado con logs de diagnóstico
 router.beforeEach((to, from, next) => {
   console.log(`[Router] Intentando navegar a: ${to.path}`)
   const isAuthenticated = localStorage.getItem('isAuthenticated')
-  
-  // Verificar autenticación para rutas protegidas
+
   if (to.meta.requiresAuth && !isAuthenticated) {
     console.warn('[Router] Acceso no autorizado, redirigiendo a login')
     return next('/login')
   }
 
-  // Redirigir si ya está autenticado y trata de acceder al login
   if (to.meta.hideForAuth && isAuthenticated) {
     console.log('[Router] Usuario autenticado, redirigiendo a /inicio')
     return next('/inicio')
@@ -105,7 +87,6 @@ router.beforeEach((to, from, next) => {
   next()
 })
 
-// Configuración del título de la página
 router.afterEach((to) => {
   const title = to.meta.title || 'Hotel Admin'
   document.title = `Hotel Admin | ${title}`
