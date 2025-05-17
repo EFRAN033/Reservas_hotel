@@ -16,19 +16,19 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div class="space-y-1">
                 <p class="text-sm text-gray-500">Nombre</p>
-                <p class="text-lg font-medium">HOtel
+                <p class="text-lg font-medium">Hotel</p>
               </div>
               <div class="space-y-1">
                 <p class="text-sm text-gray-500">Apellido</p>
-                <p class="text-lg font-medium">HIlton
+                <p class="text-lg font-medium">Hilton</p>
               </div>
               <div class="space-y-1 md:col-span-2">
                 <p class="text-sm text-gray-500">Correo Electrónico</p>
-                <p class="text-lg font-medium">admin@hotel.com
+                <p class="text-lg font-medium">admin@hotel.com</p>
               </div>
               <div class="space-y-1 md:col-span-2">
                 <p class="text-sm text-gray-500">Teléfono</p>
-                <p class="text-lg font-medium">+51 951963872
+                <p class="text-lg font-medium">+51 987654321</p>
               </div>
             </div>
           </div>
