@@ -1095,17 +1095,15 @@ select option.text-red-600 {
   background-color: #a0aec0;
 }
 
-/* Asegurar que el contenedor principal ocupe toda la altura */
 .h-screen {
   height: 100vh;
 }
 
 .flex-1 {
   flex: 1 1 0%;
-  min-height: 0; /* Importante para que el scroll funcione correctamente */
+  min-height: 0; 
 }
 
-/* Mejoras de responsive */
 @media (max-width: 640px) {
   .container {
     padding-left: 1rem;

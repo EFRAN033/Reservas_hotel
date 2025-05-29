@@ -144,7 +144,7 @@ const handleLogin = () => {
 
     if (isValid) {
       localStorage.setItem('isAuthenticated', 'true');
-      router.push({ name: 'Admin' }); // ← corregido aquí
+      router.push({ name: 'Admin' });
     } else {
       errorMessage.value = 'Credenciales incorrectas';
     }

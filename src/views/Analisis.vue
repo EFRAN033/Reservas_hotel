@@ -145,7 +145,7 @@
         tooltip.value = {
           visible: true,
           x: x,
-          y: y - 60, // Ajustar posición arriba del cursor
+          y: y - 60,
           label: chart.data.labels[point.index],
           value: chart.data.datasets[point.datasetIndex].data[point.index]
         }
@@ -182,7 +182,7 @@
         plugins: { 
           legend: { display: false },
           tooltip: {
-            enabled: false // Desactivamos tooltips nativos para usar el personalizado
+            enabled: false
           }
         },
         scales: { y: { beginAtZero: true } },
@@ -194,7 +194,6 @@
     })
     setupChartInteractivity(lineChartInstance)
   
-    // Otros gráficos (igual que antes)
     new Chart(pieChart.value, {
       type: 'pie',
       data: {

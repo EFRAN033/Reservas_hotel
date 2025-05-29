@@ -9,8 +9,6 @@
         alt="Hotel Banner"
         class="w-full h-full object-cover"
       />
-
-      <!-- Logo circular con menos zoom -->
       <button 
         @click="irAAdmin"
         class="absolute left-6 top-6 w-24 h-24 rounded-full border-3 border-white shadow-xl overflow-hidden z-50 bg-white cursor-pointer focus:outline-none focus:ring-3 focus:ring-blue-300 flex items-center justify-center p-0"
@@ -161,7 +159,6 @@ const cerrarSesion = () => {
   z-index: 30;
 }
 
-/* Estilos específicos para el logo - Zoom reducido */
 button {
   border-width: 3px;
 }
@@ -176,7 +173,7 @@ button img {
   min-height: 180%;
 }
 
-/* Asegurar que el foco sea visible */
+
 button:focus {
   outline: none;
   ring-width: 3px;

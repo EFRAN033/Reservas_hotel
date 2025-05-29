@@ -78,7 +78,6 @@ export default {
 </script>
 
 <style scoped>
-/* Efectos de hover mejorados */
 button {
   transition: all 0.2s ease;
 }
